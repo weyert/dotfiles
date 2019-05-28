@@ -52,4 +52,6 @@ mas "com.apple.iWork.Keynote", id: 409183694
 mas "com.apple.iWork.Numbers", id: 409203825
 mas "com.apple.iWork.Pages", id: 409201541
 mas "Magnet", id: 441258766
+mas "iWriter Pro", id: 893199093
+mas "AntiRSI", id: 442007571
 cask "1password-cli"

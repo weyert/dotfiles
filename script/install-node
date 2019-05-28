@@ -2,7 +2,9 @@
 set -e
 
 echo "Installing the node-build-update-defs plugin for nodenv"
-$ git clone https://github.com/nodenv/node-build-update-defs.git "$(nodenv root)"/plugins/node-build-update-defs
+if [ ! -d "$(nodenv root)/plugins/node-build-update-defs" ] ; then
+  git clone https://github.com/nodenv/node-build-update-defs.git "$(nodenv root)"/plugins/node-build-update-defs
+fi
 
 echo "Installing the lts version of Node and mark it as the default"
 eval "$(nodenv init -)"
@@ -14,3 +16,9 @@ nodenv update-version-defs
 
 echo "Installing the latest stable version of node"
 nodenv install 12.3.1
+
+echo "installing a few global npm packages"
+npm install --global serve diff-so-fancy fkill-cli npm-quick-run semantic-release-cli
+
+echo "Set the default diff utility for Git"
+git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"

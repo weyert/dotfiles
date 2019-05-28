@@ -13,12 +13,6 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 echo "Hello $(whoami)! Let's get you set up."
 
-echo "installing a few global npm packages"
-npm install --global serve diff-so-fancy fkill-cli npm-quick-run semantic-release-cli
-
-echo "Set the default diff utility for Git"
-git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
-
 # Make Chrome Two finger swipe for back and forward
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool TRUE
 

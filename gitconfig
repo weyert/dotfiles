@@ -33,6 +33,7 @@
 	# Don't prompt for commit messages for merge commits.
 	mergeoptions = --no-edit
 	commitGraph = true
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [help]
   # Autocorrect mistyped commands.
 	autocorrect = 1

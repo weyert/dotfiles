@@ -3,8 +3,10 @@
 
 cd $(dirname $0)/..
 
+script/install-node
 script/extract-onepassword-secrets
 script/install-vscode-extensions
+script/set-macos-preferences
 
 if [ "$SHELL" != "/bin/zsh" ]
 then

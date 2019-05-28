@@ -49,6 +49,7 @@ quiet_which() {
 add_to_path_end "/sbin"
 add_to_path_end "$HOME/.gem/ruby/2.3.0/bin"
 add_to_path_end "$HOME/.rbenv/bin"
+add_to_path_end "$HOME/.nodenv/bin"
 add_to_path_end "$HOME/.cabal/bin"
 add_to_path_end "$HOME/.dotfiles/bin"
 add_to_path_start "/usr/local/bin"
@@ -60,6 +61,9 @@ add_to_path_end "$GOPATH/bin"
 
 # Run rbenv if it exists
 quiet_which rbenv && add_to_path_start "$(rbenv root)/shims"
+
+# Run nodenv if it exists
+quiet_which rbenv && eval "$(nodenv init -)" 
 
 # Aliases
 alias mkdir="mkdir -vp"

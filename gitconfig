@@ -1,11 +1,12 @@
 [user]
 	# Name used in commit messages.
-	name = Mike McQuaid
+	name = Weyert de Boer
 	# Email used in commit messages.
-	email = mike@mikemcquaid.com
+	email = weyert@innerfuse.biz
+	signingkey = 7A7F6E7DF9E7EDEE
 [github]
 	# GitHub username for command-line tools.
-	user = MikeMcQuaid
+	user = weyert
 [color]
 	# Colour terminal command output when possible.
 	ui = auto

@@ -45,6 +45,9 @@ cask "vlc"
 cask "nightowl"
 cask "calibre"
 cask "avibrazil-rdm"
+cask "skype"
+cask "quicklook-json"
+cask "webpquicklook"
 mas "com.agilebits.onepassword7", id: 1333542190
 mas "com.apple.dt.Xcode", id: 497799835
 mas "com.apple.iMovieApp", id: 408981434

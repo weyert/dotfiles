@@ -41,6 +41,21 @@ CMakeCache.txt
 cmake_install.cmake
 install_manifest.txt
 
+# npm
+npm-debug.log
+
+# yarn
+yarn-error.log
+
+# VS Code
+.vscode/
+# localhistory
+.history
+
+# Over-arching stuff
+*.ignored/
+*.ignored.*
+
 # Ignore build directories.
 b/
 

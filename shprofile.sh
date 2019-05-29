@@ -3,6 +3,7 @@ umask 022
 
 # Save more history
 export HISTSIZE="100000"
+export HISTFILESIZE="${HISTSIZE}";
 export SAVEHIST="100000"
 
 # OS variables

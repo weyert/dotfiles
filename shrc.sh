@@ -79,7 +79,15 @@ alias rsync="rsync --partial --progress --human-readable --compress"
 alias rake="noglob rake"
 alias rg="rg --colors 'match:style:nobold' --colors 'path:style:nobold'"
 alias be="noglob bundle exec"
-alias sha256="shasum -a 256"
+# alias sha256="shasum -a 256"
+
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don’t want to commit.
+for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
 
 # Platform-specific stuff
 if quiet_which brew
@@ -141,7 +149,6 @@ then
   fi
 
   add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
-  add_to_path_end "$HOME/Library/Python/2.7/bin"
   add_to_path_end "/Applications/Fork.app/Contents/Resources"
   add_to_path_end "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
   add_to_path_end "/Applications/Xcode.app/Contents/Developer/usr/bin"

@@ -124,5 +124,6 @@
   },
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "atomKeymap.promptV3Features": true
 }

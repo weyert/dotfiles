@@ -55,13 +55,14 @@ cask "webpquicklook"
 cask "barrier"
 cask "java6"
 mas "com.agilebits.onepassword7", id: 1333542190
+cask "1password-cli"
+mask "Better Block", id: 1121192229
+mas "Magnet", id: 441258766
+mas "iWriter Pro", id: 893199093
+mas "AntiRSI", id: 442007571
+mas "Radium", id: 597611879
 mas "com.apple.dt.Xcode", id: 497799835
 mas "com.apple.iMovieApp", id: 408981434
 mas "com.apple.iWork.Keynote", id: 409183694
 mas "com.apple.iWork.Numbers", id: 409203825
 mas "com.apple.iWork.Pages", id: 409201541
-mas "Magnet", id: 441258766
-mas "iWriter Pro", id: 893199093
-mas "AntiRSI", id: 442007571
-mas "Radium", id: 597611879
-cask "1password-cli"

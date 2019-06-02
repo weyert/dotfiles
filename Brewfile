@@ -56,7 +56,7 @@ cask "barrier"
 cask "java6"
 mas "com.agilebits.onepassword7", id: 1333542190
 cask "1password-cli"
-mask "Better Block", id: 1121192229
+mas "Better Block", id: 1121192229
 mas "Magnet", id: 441258766
 mas "iWriter Pro", id: 893199093
 mas "AntiRSI", id: 442007571

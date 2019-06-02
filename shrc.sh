@@ -63,7 +63,7 @@ add_to_path_end "$GOPATH/bin"
 quiet_which rbenv && add_to_path_start "$(rbenv root)/shims"
 
 # Run nodenv if it exists
-quiet_which rbenv && eval "$(nodenv init -)" 
+quiet_which nodenv && eval "$(nodenv init -)"
 
 # Aliases
 alias mkdir="mkdir -vp"

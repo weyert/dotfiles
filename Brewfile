@@ -55,6 +55,7 @@ cask "quicklook-json"
 cask "webpquicklook"
 cask "barrier"
 cask "java6"
+cask "asset-catalog-tinkerer"
 mas "com.agilebits.onepassword7", id: 1333542190
 cask "1password-cli"
 mas "Better Block", id: 1121192229

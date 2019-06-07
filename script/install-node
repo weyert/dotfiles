@@ -20,5 +20,8 @@ nodenv install 12.3.1
 echo "installing a few global npm packages"
 npm install --global serve diff-so-fancy fkill-cli npm-quick-run semantic-release-cli
 
+echo "installing zsh prmpt"
+npm install -g spaceship-prompt
+
 echo "Set the default diff utility for Git"
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"

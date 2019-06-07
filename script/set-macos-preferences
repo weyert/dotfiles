@@ -535,7 +535,7 @@ tell application "Terminal"
   local allOpenedWindows
   local initialOpenedWindows
   local windowID
-  set themeName to "Pro"
+  set themeName to "One Dark"
   (* Store the IDs of all the open terminal windows. *)
   set initialOpenedWindows to id of every window
   (* Open the custom theme so that it gets added to the list
@@ -576,10 +576,16 @@ defaults write com.apple.terminal SecureKeyboardEntry -bool true
 defaults write com.apple.Terminal ShowLineMarks -int 0
 
 # Install the Solarized Dark theme for iTerm
-# open "${HOME}/init/Solarized Dark.itermcolors"
+open "${HOME}/.dotfiles/One Dark.itermcolors"
+
+# Set the Preferences directory for iTerm to the dotfiles
+defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/iterm"
+
+# Ensure the Preferences are being loaded from the above custom folder
+defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 # Don’t display the annoying prompt when quitting iTerm
-# defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
 ###############################################################################
 # Time Machine                                                                #

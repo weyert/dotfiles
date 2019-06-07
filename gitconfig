@@ -40,7 +40,7 @@
 	enabled = 1
 [core]
 	# Exclude everything this file. Used for general exclusions.
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/weyertdeboer/.gitignore
 	# Set attributes on files. Used for general diff improvements.
 	attributesfile = ~/.gitattributes
 	# Don't prompt for commit messages for merge commits.

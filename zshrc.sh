@@ -34,3 +34,10 @@ bindkey -e
 # alternate mappings for Ctrl-U/V to search the history
 bindkey "^u" history-beginning-search-backward
 bindkey "^v" history-beginning-search-forward
+
+# Enable ZSH highlighters
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship

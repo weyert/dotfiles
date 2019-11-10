@@ -69,6 +69,7 @@ brew "shellcheck"
 brew "socat"
 brew "ssh-copy-id"
 brew "wget"
+brew "salmanulfarzy/spaceship-prompt/spaceship-prompt"
 
 cask "font-firacode-nerd-font"
 cask "sourcetree"

@@ -257,6 +257,7 @@
 	verbose = true
 	# Sign commits with GPG
 	gpgsign = true
+	template = /Users/weyertdeboer/.stCommitMsg
 [tag]
 	# Sort tags by newest first
 	sort = -version:refname

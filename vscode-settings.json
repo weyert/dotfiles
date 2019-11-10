@@ -101,8 +101,8 @@
   "editor.formatOnPaste": false,
   "workbench.startupEditor": "none",
   "window.zoomLevel": 0,
-  "editor.minimap.enabled": false,
-  "workbench.activityBar.visible": false,
+  "editor.minimap.enabled": true,
+  "workbench.activityBar.visible": true,
   "spellright.language": ["en"],
   "spellright.documentTypes": ["markdown", "plaintext", "mdx"],
   "spellright.parserByClass": {
@@ -125,5 +125,12 @@
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "atomKeymap.promptV3Features": true
+  "atomKeymap.promptV3Features": true,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "java.configuration.checkProjectSettingsExclusions": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

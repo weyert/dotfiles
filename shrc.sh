@@ -47,6 +47,7 @@ quiet_which() {
 }
 
 add_to_path_end "/sbin"
+add_to_path_end "$HOME/.gem/ruby/2.6.0/bin"
 add_to_path_end "$HOME/.gem/ruby/2.3.0/bin"
 add_to_path_end "$HOME/.rbenv/bin"
 add_to_path_end "$HOME/.nodenv/bin"
@@ -97,6 +98,8 @@ then
   export HOMEBREW_AUTO_UPDATE_SECS=3600
   export HOMEBREW_BINTRAY_USER=mikemcquaid
   export HOMEBREW_DEVELOPER=1
+  export HOMEBREW_BUNDLE_BREW_SKIP="rakudo-star mkcert nss go aws-iam-authenticator docker docker-machine awscli awssume imagemagick"
+  export HOMEBREW_BUNDLE_CASK_SKIP="github/bootstrap/zulu8"
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
 
@@ -151,8 +154,6 @@ then
   add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
   add_to_path_end "/Applications/Fork.app/Contents/Resources"
   add_to_path_end "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-  add_to_path_end "/Applications/Xcode.app/Contents/Developer/usr/bin"
-  add_to_path_end "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
 
   alias ql="qlmanage -p 1>/dev/null"
   alias locate="mdfind -name"

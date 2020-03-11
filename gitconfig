@@ -3,7 +3,6 @@
 	name = Weyert de Boer
 	# Email used in commit messages.
 	email = weyert@innerfuse.biz
-	signingkey = 7A7F6E7DF9E7EDEE
 [github]
 	# GitHub username for command-line tools.
 	user = weyert

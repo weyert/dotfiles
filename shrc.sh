@@ -96,7 +96,7 @@ then
   export HOMEBREW_PREFIX="$(brew --prefix)"
   export HOMEBREW_REPOSITORY="$(brew --repo)"
   export HOMEBREW_AUTO_UPDATE_SECS=3600
-  export HOMEBREW_BINTRAY_USER=mikemcquaid
+  export HOMEBREW_BINTRAY_USER=weyert
   export HOMEBREW_DEVELOPER=1
   export HOMEBREW_BUNDLE_BREW_SKIP="rakudo-star mkcert nss go aws-iam-authenticator docker docker-machine awscli awssume imagemagick"
   export HOMEBREW_BUNDLE_CASK_SKIP="github/bootstrap/zulu8"

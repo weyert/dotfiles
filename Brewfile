@@ -9,31 +9,55 @@ tap "homebrew/formula-analytics"
 tap "homebrew/services"
 tap "homebrew/test-bot"
 tap "weyert/innerfuse"
+
 brew "git"
 brew "go"
+brew "ack"
+brew "automake"
+brew "openssl@1.1"
+brew "xz"
+brew "cmake"
 brew "container-diff"
 brew "exa"
 brew "fd"
 brew "xz"
+brew "icu4c"
+
+brew "fork-cleaner"
+brew "git"
+brew "openssl"
+brew "gnupg"
+brew "go"
 brew "grc"
 brew "md5sha1sum"
 brew "mkcert"
+
+brew "node-build"
+brew "node@12"
+brew "nodenv"
+
+brew "nss"
+brew "openconnect"
 brew "overmind"
 brew "kubernetes-cli"
+
 brew "launchdns", restart_service: true
 brew "protobuf"
 brew "ruby-build"
 brew "rbenv"
 brew "rbenv-default-gems"
 brew "ripgrep"
+
 brew "ruby"
 brew "ruby@2.4"
 brew "ruby@2.5"
+
 brew "shellcheck"
 brew "socat"
 brew "ssh-copy-id"
 brew "wget"
 brew "salmanulfarzy/spaceship-prompt/spaceship-prompt"
+brew "zsh-syntax-highlighting"
 
 brew "gnupg"
 brew "pinentry-mac"
@@ -41,33 +65,22 @@ brew "tree"
 brew "imagemagick"
 brew "jq"
 brew "mas"
-brew "shellcheck"
-brew "ssh-copy-id"
-brew "wget"
-brew "nodenv"
+
 brew "packer"
 brew "terraform"
-brew "zsh-syntax-highlighting"
+
+brew "github/bootstrap/kustomize@2.0"
+
 cask "font-firacode-nerd-font"
-cask "sourcetree"
-cask "ngrok"
-cask "viscosity"
 cask "alfred"
+cask "1password-cli"
 cask "docker"
-cask "firefox"
-cask "google-chrome"
-cask "google-chrome-canary"
-cask "microsoft-edge"
-cask "microsoft-edge-canary"
-cask "safari-technology-preview"
+
 cask "vmware-fusion"
 cask "keepingyouawake"
-cask "sketch"
+
+cask "sizeup"
 cask "transmission"
-cask "visual-studio-code"
-cask "visual-studio-code-insiders"
-cask "dash"
-cask "tableplus"
 cask "the-hit-list"
 cask "nightowl"
 cask "iterm2"
@@ -81,20 +94,37 @@ cask "insomnia"
 cask "charles"
 cask "postman"
 cask "android-studio"
-mas "Xcode", id: 497799835
+cask "vmware-fusion"
+cask "visual-studio-code"
+cask "visual-studio-code-insiders"
+cask "vnc-viewer"
+cask "sourcetree"
+cask "fork"
+cask "ngrok"
+cask "viscosity"
+cask "dash"
+cask "tableplus"
+
+# Browsers
+cask "firefox"
+cask "google-chrome"
+cask "google-chrome-canary"
+cask "microsoft-edge"
+cask "microsoft-edge-canary"
+cask "safari-technology-preview"
 
 # Design Tools
-cask "affinity-photo-beta"
-cask "affinity-designer-beta"
 cask "google-nik-collection"
 cask "fontbase"
+cask "sketch"
 
 # Apple Products
 mas "com.apple.dt.Xcode", id: 497799835
-mas "com.apple.iMovieApp", id: 408981434
-mas "com.apple.iWork.Keynote", id: 409183694
-mas "com.apple.iWork.Numbers", id: 409203825
-mas "com.apple.iWork.Pages", id: 409201541
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Xcode", id: 497799835
 
 # Social Media
 mas "Twitter for Mac", id: 1482454543
@@ -122,3 +152,4 @@ mas "com.agilebits.onepassword7", id: 1333542190
 # Content Blockers
 mas "Better Block", id: 1121192229
 mas "Wipr", id: 1320666476
+mas "StopTheMadness", id: 1376402589

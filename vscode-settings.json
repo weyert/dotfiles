@@ -1,78 +1,115 @@
 {
 	// Place your settings in this file to overwrite the default settings
+	"editor.formatOnPaste": false,
 	"editor.formatOnSave": true,
+	"editor.formatOnSaveTimeout": 5000,
+	"editor.formatOnType": true,
+	"editor.scrollBeyondLastLine": false,
+	"editor.renderLineHighlight": "none",
+	"workbench.editor.enablePreviewFromQuickOpen": false,
+	"workbench.editor.revealIfOpen": true,
+	"workbench.editor.tabSizing": "shrink",
+	"files.autoSave": "onFocusChange",
+	"files.trimFinalNewlines": true,
+	"search.smartCase": true,
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true,
+	"window.nativeTabs": true,
+	"window.titleBarStyle": "native",
+	"workbench.fontAliasing": "auto",
+	"workbench.editor.closeOnFileDelete": false,
 	"editor.detectIndentation": true,
 	"editor.fontSize": 16,
-	"editor.lightbulb.enabled": false,
+	"editor.renderIndentGuides": true,
+	"editor.selectionHighlight": true,
+	"editor.renderControlCharacters": false,
+	"editor.lightbulb.enabled": true,
 	"editor.parameterHints.enabled": false,
-	"editor.fontFamily": "'Dank Mono', Menlo, Monaco, 'Courier New', monospace",
+	"editor.fontFamily": "'Dank Mono', 'Fira Code Bold Nerd Font', Menlo, Monaco, 'Courier New', monospace",
 	"editor.fontLigatures": false,
-	"editor.rulers": [80],
+	"editor.rulers": [
+		80,
+		118
+	],
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": true,
+		"strings": true
+	},
+	"editor.wordWrap": "bounded",
+	"editor.wordWrapColumn": 118,
 	"editor.snippetSuggestions": "top",
 	"editor.wordBasedSuggestions": false,
 	"editor.suggest.localityBonus": true,
 	"editor.acceptSuggestionOnCommitCharacter": false,
 	"editor.acceptSuggestionOnEnter": "off",
+	"ruby.useLanguageServer": true,
+	"ruby.lint": {
+		"rubocop": true
+	},
+	"ruby.format": "rubocop",
 	"[javascript]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode",
-	  "editor.suggestSelection": "recentlyUsed",
-	  "editor.suggest.filteredTypes": {
-		"keyword": false
-	  }
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.suggestSelection": "recentlyUsed",
+		"editor.suggest.filteredTypes": {
+			"keyword": false
+		}
 	},
 	"[typescript]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode",
-	  "editor.suggestSelection": "recentlyUsed",
-	  "editor.suggest.filteredTypes": {
-		"keyword": false
-	  }
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.suggestSelection": "recentlyUsed",
+		"editor.suggest.filteredTypes": {
+			"keyword": false
+		}
 	},
 	"editor.tabSize": 2,
 	"editor.renderWhitespace": "boundary",
 	"editor.glyphMargin": false,
 	"editor.folding": false,
 	"files.exclude": {
-	  "USE_GITIGNORE": true
+		"USE_GITIGNORE": true
 	},
 	"javascript.suggest.autoImports": false,
 	"javascript.validate.enable": false,
 	"search.exclude": {
-	  "**/node_modules": true,
-	  "**/bower_components": true,
-	  "**/coverage": true,
-	  "**/dist": true,
-	  "**/build": true,
-	  "**/.build": true,
-	  "**/.gh-pages": true
+		"**/node_modules": true,
+		"**/bower_components": true,
+		"**/coverage": true,
+		"**/dist": true,
+		"**/build": true,
+		"**/.build": true,
+		"**/.gh-pages": true
 	},
 	"eslint.autoFixOnSave": false,
 	"eslint.validate": [
-	  "javascript",
-	  "javascriptreact",
-	  "typescript",
-	  "typescriptreact"
+		"javascript",
+		"javascriptreact",
+		"typescript",
+		"typescriptreact"
 	],
 	"eslint.options": {
-	  "env": {
-		"browser": true,
-		"jest/globals": true,
-		"es6": true
-	  },
-	  "parserOptions": {
-		"ecmaVersion": 2018,
-		"sourceType": "module",
-		"ecmaFeatures": {
-		  "jsx": true
+		"env": {
+			"browser": true,
+			"jest/globals": true,
+			"es6": true
+		},
+		"parserOptions": {
+			"ecmaVersion": 2018,
+			"sourceType": "module",
+			"ecmaFeatures": {
+				"jsx": true
+			}
+		},
+		"rules": {
+			"no-debugger": "off"
 		}
-	  },
-	  "rules": {
-		"no-debugger": "off"
-	  }
 	},
-	"terminal.integrated.shellArgs.osx": ["-l"],
+	"terminal.integrated.shellArgs.osx": [
+		"-l"
+	],
 	"terminal.integrated.scrollback": 10000,
 	"files.associations": {
-	  "*.md": "mdx"
+		"*.md": "mdx"
 	},
 	"explorer.openEditors.visible": 0,
 	"editor.lineNumbers": "on",
@@ -97,17 +134,26 @@
 	"explorer.confirmDragAndDrop": false,
 	"workbench.sideBar.location": "left",
 	"editor.multiCursorModifier": "ctrlCmd",
-	"editor.formatOnPaste": false,
 	"workbench.startupEditor": "none",
 	"window.zoomLevel": 0,
 	"editor.minimap.enabled": true,
 	"workbench.activityBar.visible": true,
-	"spellright.language": ["en"],
-	"spellright.documentTypes": ["markdown", "plaintext", "mdx"],
+	"spellright.language": [
+		"en_GB",
+		"en_US"
+	],
+	"spellright.documentTypes": [
+		"markdown",
+		"plaintext",
+		"mdx"
+	],
+	"search.runInExtensionHost": true,
+	"spellright.groupDictionaries": false,
+	"spellright.addToSystemDictionary": true,
 	"spellright.parserByClass": {
-	  "mdx": {
-		"parser": "markdown"
-	  }
+		"mdx": {
+			"parser": "markdown"
+		}
 	},
 	"javascript.updateImportsOnFileMove.enabled": "never",
 	"typescript.updateImportsOnFileMove.enabled": "never",
@@ -119,20 +165,20 @@
 	"editor.suggestSelection": "first",
 	"vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 	"[jsonc]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"[json]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"atomKeymap.promptV3Features": true,
 	"[html]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"java.configuration.checkProjectSettingsExclusions": false,
 	"[typescriptreact]": {
-	  "editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"editor.codeActionsOnSave": {
-	  "source.fixAll.eslint": false
+		"source.fixAll.eslint": false
 	}
-  }
+}

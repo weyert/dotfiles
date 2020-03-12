@@ -40,14 +40,9 @@ bindkey "^v" history-beginning-search-forward
 # Enable ZSH highlighters
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# Set Spaceship ZSH as a prompt
-autoload -U promptinit; promptinit
-prompt spaceship
-
 # Enable Java Runtime
 JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 export JAVA_HOME
 export PATH=$PATH:$JAVA_HOME/bin
 
-#
-. /usr/local/etc/profile.d/z.sh
+zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme

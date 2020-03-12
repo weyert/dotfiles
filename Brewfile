@@ -40,6 +40,7 @@ brew "nss"
 brew "openconnect"
 brew "overmind"
 brew "kubernetes-cli"
+brew "ansible"
 
 brew "launchdns", restart_service: true
 brew "protobuf"
@@ -56,8 +57,8 @@ brew "shellcheck"
 brew "socat"
 brew "ssh-copy-id"
 brew "wget"
-brew "salmanulfarzy/spaceship-prompt/spaceship-prompt"
 brew "zsh-syntax-highlighting"
+brew "zplug"
 
 brew "gnupg"
 brew "pinentry-mac"
@@ -104,13 +105,24 @@ cask "ngrok"
 cask "viscosity"
 cask "dash"
 cask "tableplus"
+cask "sip"
+cask "bettertouchtool"
+cask "focus"
+
+# Quick Look utilities
+cask "betterzip"
+cask "qlcolorcode"
+cask "qlmarkdown"
+cask "qlstephen"
+cask "quicklook-json"
+cask "webpquicklook"
 
 # Browsers
 cask "firefox"
 cask "google-chrome"
 cask "google-chrome-canary"
 cask "microsoft-edge"
-cask "microsoft-edge-canary"
+cask "microsoft-edge-beta"
 cask "safari-technology-preview"
 
 # Design Tools
@@ -147,7 +159,7 @@ mas "Tomato 2: Pomodoro Timer", id: 1494210770
 mas "Dynamo", id: 1445910651
 
 # Security
-mas "com.agilebits.onepassword7", id: 1333542190
+# mas "com.agilebits.onepassword7", id: 1333542190
 
 # Content Blockers
 mas "Better Block", id: 1121192229

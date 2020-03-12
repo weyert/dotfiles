@@ -1,0 +1,47 @@
+#!/bin/bash
+set -e
+
+[ $(uname -s) = "Darwin" ] && export MACOS=1 && export UNIX=1
+[ $(uname -s) = "Linux" ] && export LINUX=1 && export UNIX=1
+uname -s | grep -q "_NT-" && export WINDOWS=1
+
+if [ $MACOS ]
+then
+  VSCODE_BETA="$HOME/Library/Application Support/Code - Insiders/User"
+elif [ $LINUX ]
+then
+  VSCODE_BETA="$HOME/.config/Code/User"
+elif [ $WINDOWS ]
+then
+  VSCODE_BETA="$APPDATA/Code/User"
+fi
+
+if ! command -v code-insiders >/dev/null
+then
+  echo "Install VS Code Beta first!" >&2
+  exit 1
+fi
+
+# Link the settings for this Visual Studio Beta
+DOTFILESDIRREL=$(dirname $0)
+cd $DOTFILESDIRREL/..
+DOTFILESDIR=$(pwd -P)
+
+HOMEFILE="$VSCODE_BETA/settings.json" && mkdir -p "$VSCODE_BETA"
+DIRFILE="$DOTFILESDIR/vscode-settings.json"
+
+rm -rv "$HOMEFILE"
+ln -sv "$DIRFILE" "$HOMEFILE"
+
+# Install all the relevant Visual Studio Code Beta
+EXTENSIONS="$(code-insiders --list-extensions)"
+
+for EXTENSION in $(cat $(dirname $0)/../vscode-extensions)
+do
+  if echo "$EXTENSIONS" | grep -q "$EXTENSION"
+  then
+    echo "Extension '$EXTENSION' is already installed."
+  else
+    code-insiders --install-extension "$EXTENSION"
+  fi
+done

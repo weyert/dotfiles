@@ -1,5 +1,3 @@
-
-
 # check if this is a login shell
 [ "$0" = "-zsh" ] && export LOGIN_ZSH=1
 
@@ -37,12 +35,31 @@ bindkey -e
 bindkey "^u" history-beginning-search-backward
 bindkey "^v" history-beginning-search-forward
 
-# Enable ZSH highlighters
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # Enable Java Runtime
 JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
 export JAVA_HOME
 export PATH=$PATH:$JAVA_HOME/bin
 
+# Enable ZSH zplug feature
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# Plugins
 zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search", defer:3
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
+fi
+# Load zplugzplug load
+
+# Enable the spaceship functionality
+autoload -U promptinit; promptinit
+prompt spaceship

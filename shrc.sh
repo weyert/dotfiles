@@ -21,8 +21,11 @@ field() {
 # Setup paths
 remove_from_path() {
   [ -d "$1" ] || return
-  # Doesn't work for first item in the PATH but I don't care.
-  export PATH=${PATH//:$1/}
+  PATHSUB=":$PATH:"
+  PATHSUB=${PATHSUB//:$1:/:}
+  PATHSUB=${PATHSUB#:}
+  PATHSUB=${PATHSUB%:}
+  export PATH="$PATHSUB"
 }
 
 add_to_path_start() {
@@ -46,15 +49,11 @@ quiet_which() {
   command -v "$1" >/dev/null
 }
 
-add_to_path_end "/sbin"
-add_to_path_end "$HOME/.gem/ruby/2.6.0/bin"
-add_to_path_end "$HOME/.gem/ruby/2.3.0/bin"
-add_to_path_end "$HOME/.rbenv/bin"
-add_to_path_end "$HOME/.nodenv/bin"
-add_to_path_end "$HOME/.cabal/bin"
+add_to_path_end "/usr/local/bin"
+add_to_path_end "/usr/local/sbin"
+
 add_to_path_end "$HOME/.dotfiles/bin"
-add_to_path_start "/usr/local/bin"
-add_to_path_start "/usr/local/sbin"
+add_to_path_end "$HOME/.gem/ruby/2.6.0/bin"
 
 # Setup Go development
 export GOPATH="$HOME/.gopath"
@@ -98,7 +97,7 @@ then
   export HOMEBREW_AUTO_UPDATE_SECS=3600
   export HOMEBREW_BINTRAY_USER=weyert
   export HOMEBREW_DEVELOPER=1
-  export HOMEBREW_BUNDLE_BREW_SKIP="rakudo-star mkcert nss go aws-iam-authenticator docker docker-machine awscli awssume imagemagick"
+  export HOMEBREW_BUNDLE_BREW_SKIP="rakudo-star mkcert nss aws-iam-authenticator docker docker-machine awscli awssume imagemagick hyperscan kubectl@1.14 kustomize@2.0 container-diff"
   export HOMEBREW_BUNDLE_CASK_SKIP="github/bootstrap/zulu8"
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
@@ -152,13 +151,13 @@ then
   fi
 
   add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
-  add_to_path_end "/Applications/Fork.app/Contents/Resources"
   add_to_path_end "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
   alias ql="qlmanage -p 1>/dev/null"
+  alias gitfox="/Applications/Setapp/Gitfox.app/Contents/SharedSupport/bin/gf"
+  alias vmrun="/Applications/VMware Fusion.app/Contents/Public/vmrun"
   alias locate="mdfind -name"
   alias finder-hide="setfile -a V"
-  alias fork="fork_cli"
 
   rbenv-nodenv-homebrew-sync
 elif [ "$LINUX" ]
@@ -235,9 +234,6 @@ trash() {
 
 # GitHub API shortcut
 github-api-curl() {
-  curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
+  noglob curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
 }
 alias github-api-curl="noglob github-api-curl"
-
-# Look in ./bin but do it last to avoid weird `which` results.
-force_add_to_path_start "bin"

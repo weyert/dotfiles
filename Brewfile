@@ -1,5 +1,4 @@
 tap "github/bootstrap"
-tap "heroku/brew"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
@@ -14,8 +13,10 @@ brew "git"
 brew "go"
 brew "ack"
 brew "automake"
+brew "aws-iam-authenticator"
 brew "openssl@1.1"
 brew "xz"
+brew "awscli"
 brew "cmake"
 brew "container-diff"
 brew "exa"
@@ -24,10 +25,8 @@ brew "xz"
 brew "icu4c"
 
 brew "fork-cleaner"
-brew "git"
 brew "openssl"
 brew "gnupg"
-brew "go"
 brew "grc"
 brew "md5sha1sum"
 brew "mkcert"
@@ -49,13 +48,16 @@ brew "rbenv"
 brew "rbenv-default-gems"
 brew "ripgrep"
 
+brew "go"
 brew "ruby"
 brew "ruby@2.4"
 brew "ruby@2.5"
+brew "ruby@2.6"
 
 brew "shellcheck"
 brew "socat"
-brew "ssh-copy-id"
+brew "hyperscan"
+brew "softhsm"
 brew "wget"
 brew "zsh-syntax-highlighting"
 brew "zplug"
@@ -71,19 +73,18 @@ brew "packer"
 brew "terraform"
 
 brew "github/bootstrap/kustomize@2.0"
+brew "github/packages/awssume"
 
 cask "font-firacode-nerd-font"
 cask "alfred"
+cask "1password"
 cask "1password-cli"
 cask "docker"
 
 cask "vmware-fusion"
-cask "keepingyouawake"
 
 cask "sizeup"
 cask "transmission"
-cask "the-hit-list"
-cask "nightowl"
 cask "iterm2"
 cask "calibre"
 cask "avibrazil-rdm"
@@ -91,18 +92,15 @@ cask "quicklook-json"
 cask "webpquicklook"
 
 # Internet/Development Tools
+cask "setapp"
 cask "insomnia"
 cask "charles"
-cask "postman"
 cask "android-studio"
 cask "vmware-fusion"
 cask "visual-studio-code"
 cask "visual-studio-code-insiders"
 cask "vnc-viewer"
 cask "sourcetree"
-cask "fork"
-cask "ngrok"
-cask "viscosity"
 cask "dash"
 cask "tableplus"
 cask "sip"
@@ -153,13 +151,8 @@ mas "AntiRSI", id: 442007571
 mas "iWriter Pro", id: 893199093
 
 # Utilities
-cask "1password-cli"
 mas "Microsoft To Do", id: 1274495053
-mas "Tomato 2: Pomodoro Timer", id: 1494210770
 mas "Dynamo", id: 1445910651
-
-# Security
-# mas "com.agilebits.onepassword7", id: 1333542190
 
 # Content Blockers
 mas "Better Block", id: 1121192229

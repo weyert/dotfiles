@@ -39,6 +39,11 @@ for DOTFILE in *; do
     HOMEFILE="$HOME/GitHub/github/.vscode"
   fi
 
+  if echo $DOTFILE | grep -q 'rubocop.yml'
+  then
+    HOMEFILE="$HOME/Documents/.rubocop.yml"
+  fi
+
   if [ $UNIX ]
   then
     if [ -L "$HOMEFILE" ] && ! [ -d $DOTFILE ]

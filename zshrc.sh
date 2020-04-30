@@ -63,3 +63,14 @@ fi
 # Enable the spaceship functionality
 autoload -U promptinit; promptinit
 prompt spaceship
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+
+# Enable ava switching
+jdk() {
+        version=$1
+        export JDK_HOME=$(/usr/libexec/java_home -v"$version");
+        export JAVA_PATH=$JDK_HOME
+  	export JAVA_HOME=$JDK_HOME
+        java -version
+ }

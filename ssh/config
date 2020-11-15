@@ -12,6 +12,7 @@ Host *
 	IdentityFile ~/.ssh/id_keytree_rsa
 	IdentityFile ~/.ssh/id_rsa_kikkernet
 	IdentityFile ~/.ssh/id_rsa
+	IdentityFile ~/.ssh/id_tapico_rsa
 	UseKeychain yes
 	AddKeysToAgent yes
 	ControlMaster auto

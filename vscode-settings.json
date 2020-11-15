@@ -48,13 +48,13 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.suggestSelection": "recentlyUsed",
     "editor.suggest.showKeywords": false,
-    "editor.suggest.showSnippets": true,
+    "editor.suggest.showSnippets": true
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.suggestSelection": "recentlyUsed",
     "editor.suggest.showKeywords": false,
-    "editor.suggest.showSnippets": true,
+    "editor.suggest.showSnippets": true
   },
   "editor.tabSize": 2,
   "editor.renderWhitespace": "boundary",
@@ -167,5 +167,9 @@
   "debug.node.autoAttach": "on",
   "terminal.external.osxExec": "",
   "terminal.external.linuxExec": "",
-  "terminal.integrated.automationShell.osx": ""
+  "terminal.integrated.automationShell.osx": "",
+  "git.enableCommitSigning": true,
+  "git.fetchOnPull": true,
+  "git.openDiffOnClick": false,
+  "gitlens.blame.ignoreWhitespace": true
 }

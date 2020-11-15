@@ -7,7 +7,6 @@ tap "homebrew/core"
 tap "homebrew/formula-analytics"
 tap "homebrew/services"
 tap "homebrew/test-bot"
-tap "weyert/innerfuse"
 
 brew "git"
 brew "go"
@@ -79,9 +78,8 @@ brew "packer"
 brew "terraform"
 
 brew "github/bootstrap/kustomize@2.0"
-brew "github/packages/awssume"
 
-cask "font-firacode-nerd-font"
+cask "font-fira-code-nerd-font"
 cask "alfred"
 cask "1password"
 cask "1password-cli"

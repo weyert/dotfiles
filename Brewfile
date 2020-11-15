@@ -135,7 +135,7 @@ cask "microsoft-edge-beta"
 cask "safari-technology-preview"
 
 # Design Tools
-cask "google-nik-collection"
+# cask "google-nik-collection"
 cask "rightfont"
 cask "sketch"
 cask "figma"

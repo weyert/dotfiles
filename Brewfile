@@ -111,7 +111,7 @@ cask "docker"
 cask "vmware-fusion"
 
 # Firewall/Security
-cask "little-snitch"
+# cask "little-snitch"
 
 # Installed via Setapp
 # cask "sip"
@@ -173,3 +173,4 @@ mas "Dynamo", id: 1445910651
 mas "Better Block", id: 1121192229
 mas "Wipr", id: 1320666476
 mas "StopTheMadness", id: 1376402589
+mas "1Blocker", id: 1365531024

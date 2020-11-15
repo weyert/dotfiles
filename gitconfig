@@ -46,6 +46,8 @@
 	mergeoptions = --no-edit
 	commitGraph = true
 	pager = diff-so-fancy | less --tabs=4 -RFX
+	# Output unicode characters (e.g. emoji).
+     	quotepath = on
 [help]
   # Autocorrect mistyped commands.
 	autocorrect = 1
@@ -275,3 +277,5 @@
 	trustExitCode = true
 [gpg]
 	program = gpg2
+[init]
+	defaultBranch = main

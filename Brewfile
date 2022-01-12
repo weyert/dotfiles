@@ -9,14 +9,14 @@ tap "homebrew/services"
 tap "homebrew/test-bot"
 
 brew "git"
+brew "git-filter-repo"
 brew "go"
 brew "ack"
 brew "automake"
 brew "bat"
-brew "aws-iam-authenticator"
+brew "dive"
 brew "openssl@1.1"
 brew "xz"
-brew "awscli"
 brew "cmake"
 brew "diff-so-fancy"
 brew "container-diff"
@@ -35,8 +35,9 @@ brew "md5sha1sum"
 brew "mkcert"
 
 brew "node-build"
-brew "node@12"
+brew "node@16"
 brew "nodenv"
+brew "volta"
 
 brew "nss"
 brew "openconnect"
@@ -80,6 +81,8 @@ brew "terraform"
 brew "github/bootstrap/kustomize@2.0"
 
 cask "font-fira-code-nerd-font"
+cask "font-ibm-plex"
+cask "font-ibmplexmono-nerd-font-mono"
 cask "alfred"
 cask "1password"
 cask "1password-cli"
@@ -90,6 +93,7 @@ cask "transmission"
 cask "avibrazil-rdm"
 cask "iterm2"
 cask "contexts"
+cask "duet"
 
 # Hobbies
 cask "calibre"
@@ -103,15 +107,13 @@ cask "android-studio"
 cask "vmware-fusion"
 cask "visual-studio-code"
 cask "visual-studio-code-insiders"
-# cask "vnc-viewer"
 cask "sourcetree"
-cask "dash"
-# cask "tableplus"
 cask "docker"
 cask "vmware-fusion"
+cask "google-cloud-sdk"
 
 # Firewall/Security
-# cask "little-snitch"
+cask "little-snitch"
 
 # Installed via Setapp
 # cask "sip"
@@ -128,11 +130,13 @@ cask "webpquicklook"
 
 # Browsers
 cask "firefox"
+cask "firefox-developer-edition"
 cask "google-chrome"
 cask "google-chrome-canary"
 cask "microsoft-edge"
 cask "microsoft-edge-beta"
 cask "safari-technology-preview"
+cask "brave-browser"
 
 # Design Tools
 # cask "google-nik-collection"
@@ -157,7 +161,6 @@ mas "Twitter for Mac", id: 1482454543
 mas "Receiver Radio", id: 1445434819
 cask "amazon-music"
 cask "spotify"
-cask "beamer"
 cask "vlc"
 
 # Productivity

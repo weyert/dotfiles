@@ -74,3 +74,7 @@ jdk() {
   	export JAVA_HOME=$JDK_HOME
         java -version
  }
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/opt/openjdk/bin:$PATH"
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"

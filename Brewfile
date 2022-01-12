@@ -98,6 +98,7 @@ cask "duet"
 # Hobbies
 cask "calibre"
 cask "simple-comic"
+cask "yacreader"
 
 # Internet/Development Tools
 cask "setapp"

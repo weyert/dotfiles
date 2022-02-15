@@ -12,3 +12,5 @@ bundle/cache
 secrets
 rbenv/*/
 Brewfile.lock.json
+ssh/podman-machine-default
+ssh/podman-machine-default.pub

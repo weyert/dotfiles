@@ -104,7 +104,6 @@
       "no-debugger": "off"
     }
   },
-  "terminal.integrated.shellArgs.osx": ["-l"],
   "terminal.integrated.scrollback": 10000,
   "files.associations": {
     "*.md": "mdx"
@@ -124,7 +123,6 @@
   "prettier.proseWrap": "always",
   "prettier.requireConfig": true,
   "local-history.absolute": true,
-  "local-history.path": "/Users/weyertdeboer/.vscode-history",
   "grunt.autoDetect": "off",
   "npm.runSilent": true,
   "gulp.autoDetect": "off",
@@ -171,11 +169,13 @@
   "debug.node.autoAttach": "on",
   "terminal.external.osxExec": "",
   "terminal.external.linuxExec": "",
-  "terminal.integrated.automationShell.osx": "",
   "git.enableCommitSigning": true,
   "git.fetchOnPull": true,
   "git.openDiffOnClick": false,
   "gitlens.blame.ignoreWhitespace": true,
   "bracket-pair-colorizer-2.depreciation-notice": false,
   "bracketPairColorizer.depreciation-notice": false,
+  "vscode-edge-devtools.mirrorEdits": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.zoomLevel": 1
 }

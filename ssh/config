@@ -1,18 +1,16 @@
 Host *.github.com *.github.net *.githubapp.com
 	ForwardAgent no
 	User weyert
-
-Host * !heroku.com !github.com !github.net
-	RemoteForward 52698 localhost:52698
+        UseKeychain yes
+        AddKeysToAgent yes
+        IdentityFile ~/.ssh/id_rsa
 
 Host *
 	StrictHostKeyChecking ask
 	VerifyHostKeyDNS ask
 	NoHostAuthenticationForLocalhost yes
-	IdentityFile ~/.ssh/id_keytree_rsa
 	IdentityFile ~/.ssh/id_rsa_kikkernet
 	IdentityFile ~/.ssh/id_rsa
-	IdentityFile ~/.ssh/id_tapico_rsa
 	UseKeychain yes
 	AddKeysToAgent yes
 	ControlMaster auto

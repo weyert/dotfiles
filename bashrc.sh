@@ -19,5 +19,18 @@ export NODE_REPL_HISTORY=~/.node_history;
 export NODE_REPL_HISTORY_SIZE='32768';
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE='sloppy';
+
+# enable direnv (if installed)
+which direnv &>/dev/null && eval "$(direnv hook bash)"
+
+# enable mcfly (if installed)
+which mcfly &>/dev/null && eval "$(mcfly init bash)"
+
+# enable starship (if installed)
+which starship &>/dev/null && eval "$(starship init bash)"
+
+
+# to avoid non-zero exit code
+true
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"

@@ -1,8 +1,5 @@
-# check if this is a login shell
-[ "$0" = "-zsh" ] && export LOGIN_ZSH=1
-
-# run zprofile if this is not a login shell
-[ -n "$LOGIN_ZSH" ] && source ~/.zprofile
+# always source zprofile regardless of whether this is/isn't a login shell
+source ~/.zprofile
 
 # load shared shell configuration
 source ~/.shrc
@@ -22,6 +19,10 @@ setopt share_history
 # Don't hang up background jobs
 setopt no_hup
 
+# autocorrect command and parameter spelling
+setopt correct
+setopt correctall
+
 # use emacs bindings even with vim as EDITOR
 bindkey -e
 
@@ -35,46 +36,44 @@ bindkey -e
 bindkey "^u" history-beginning-search-backward
 bindkey "^v" history-beginning-search-forward
 
-# Enable Java Runtime
-JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home
-export JAVA_HOME
-export PATH=$PATH:$JAVA_HOME/bin
+# enable autosuggestions
+ZSH_AUTOSUGGESTIONS="$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+[ -f "$ZSH_AUTOSUGGESTIONS" ] && source "$ZSH_AUTOSUGGESTIONS"
 
-# Enable ZSH zplug feature
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
+# enable direnv (if installed)
+which direnv &>/dev/null && eval "$(direnv hook zsh)"
 
-# Plugins
-zplug "denysdovhan/spaceship-prompt", use:spaceship.zsh, from:github, as:theme
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search", defer:3
+# enable mcfly (if installed)
+which mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-  printf "Install? [y/N]: "
-  if read -q; then
-    echo; zplug install
-  fi
+# enable zplug
+if brew ls --versions zplug > /dev/null; then
+	export ZPLUG_HOME=/usr/local/opt/zplug
+	source $ZPLUG_HOME/init.zsh
+	#
+	# Plugins
+	zplug "zsh-users/zsh-autosuggestions"
+	zplug "zsh-users/zsh-completions"
+	zplug "zsh-users/zsh-syntax-highlighting", defer:2
+	zplug "zsh-users/zsh-history-substring-search", defer:3
+
+	# Install plugins if there are plugins that have not been installed
+	if ! zplug check --verbose; then
+		printf "Install? [y/N]: "
+		if read -q; then
+			echo; zplug install
+		fi
+	fi
+
+	# Then, source plugins and add commands to $PATH
+	zplug load
 fi
-# Load zplugzplug load
 
-# Enable the spaceship functionality
-autoload -U promptinit; promptinit
-prompt spaceship
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
-
-# Enable ava switching
-jdk() {
-        version=$1
-        export JDK_HOME=$(/usr/libexec/java_home -v"$version");
-        export JAVA_PATH=$JDK_HOME
-  	export JAVA_HOME=$JDK_HOME
-        java -version
- }
-export PATH="/usr/local/bin:$PATH"
-export PATH="/usr/local/opt/openjdk/bin:$PATH"
+# to avoid non-zero exit code
+true
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true

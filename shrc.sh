@@ -49,8 +49,9 @@ quiet_which() {
   command -v "$1" >/dev/null
 }
 
-add_to_path_end "/usr/local/bin"
-add_to_path_end "/usr/local/sbin"
+add_to_path_start "/home/linuxbrew/.linuxbrew/bin"
+add_to_path_start "/usr/local/bin"
+add_to_path_start "/opt/homebrew/bin"
 
 add_to_path_end "$HOME/.dotfiles/bin"
 add_to_path_end "$HOME/.gem/ruby/2.6.0/bin"
@@ -62,8 +63,8 @@ add_to_path_end "$GOPATH/bin"
 # Run rbenv if it exists
 quiet_which rbenv && add_to_path_start "$(rbenv root)/shims"
 
-# Run nodenv if it exists
-quiet_which nodenv && eval "$(nodenv init -)"
+# enable starship (if installed)
+which starship &>/dev/null && eval "$(starship init zsh)"
 
 # Aliases
 alias mkdir="mkdir -vp"
@@ -78,111 +79,123 @@ alias less="less --ignore-case --raw-control-chars"
 alias rsync="rsync --partial --progress --human-readable --compress"
 alias rake="noglob rake"
 alias rg="rg --colors 'match:style:nobold' --colors 'path:style:nobold'"
-alias be="noglob bundle exec"
-# alias sha256="shasum -a 256"
+alias be="nocorrect noglob bundle exec"
+alias sha256="shasum -a 256"
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
-
-# Platform-specific stuff
+# Command-specific stuff
 if quiet_which brew
 then
-  export HOMEBREW_PREFIX="$(brew --prefix)"
-  export HOMEBREW_REPOSITORY="$(brew --repo)"
+  eval $(brew shellenv)
+
   export HOMEBREW_AUTO_UPDATE_SECS=3600
-  export HOMEBREW_BINTRAY_USER=weyert
   export HOMEBREW_DEVELOPER=1
   export HOMEBREW_UPDATE_REPORT_ONLY_INSTALLED=1
-  export HOMEBREW_BUNDLE_BREW_SKIP="rakudo-star mkcert nss aws-iam-authenticator docker docker-machine awscli awssume imagemagick hyperscan kubectl@1.14 kustomize@2.0 container-diff"
-  export HOMEBREW_BUNDLE_CASK_SKIP="github/bootstrap/zulu8"
   export HOMEBREW_GIT_FILTER_TREE_ZERO=1
+  export HOMEBREW_BOOTSNAP=1
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
-
-  # Output whether the dependencies for a Homebrew package are bottled.
-  brew_bottled_deps() {
-    for DEP in "$@"; do
-      echo "$DEP deps:"
-      brew deps --include-build "$DEP" | xargs brew info | grep stable
-      [ "$#" -ne 1 ] && echo
-    done
-  }
-
-  # Output the most popular unbottled Homebrew packages
-  brew_popular_unbottled() {
-    brew deps --include-build --all |
-      awk '{ gsub(":? ", "\n") } 1' |
-      sort |
-      uniq -c |
-      sort |
-      tail -n 500 |
-      awk '{print $2}' |
-      xargs brew info |
-      grep stable |
-      grep -v bottled
-  }
+  alias intelbrew='arch -x86_64 /usr/local/bin/brew'
 fi
 
+if quiet_which git-delta
+then
+  export GIT_PAGER='delta'
+else
+  # shellcheck disable=SC2016
+  export GIT_PAGER='less -+$LESS -RX'
+fi
+
+if quiet_which exa
+then
+  alias ls="exa --classify --group --git"
+elif [ "$MACOS" ]
+then
+  alias ls="ls -F"
+else
+  alias ls="ls -F --color=auto"
+fi
+
+if quiet_which bat
+then
+  export BAT_THEME="ansi"
+  alias cat="bat"
+fi
+
+if quiet_which prettyping
+then
+  alias ping="prettyping --nolegend"
+fi
+
+if quiet_which htop
+then
+  alias top="sudo htop"
+fi
+
+if quiet_which dust
+then
+  alias du="dust"
+fi
+
+if quiet_which duf
+then
+  alias df="duf"
+fi
+
+if quiet_which mcfly
+then
+  export MCFLY_LIGHT=TRUE
+  export MCFLY_FUZZY=true
+  export MCFLY_RESULTS=64
+fi
+
+
+
+# Configure environment
+export CLICOLOR=1
+export HEROKU_ORGANIZATION="github-enterprise"
+export GITHUB_PROFILE_BOOTSTRAP=1
+export GITHUB_PACKAGES_SUBPROJECT_CACHE_READ=1
+
+# OS-specific configuration
 if [ "$MACOS" ]
 then
+  export GITHUB_USE_HOMEBREW_BINARIES=1
+  export HOMEBREW_GITHUB_USE_HOMEBREW_BINARIES=1
+  export GITHUB_NO_AUTO_BOOTSTRAP=1
   export GREP_OPTIONS="--color=auto"
-  export CLICOLOR=1
   export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
-  export RESQUE_REDIS_URL="redis://localhost:6379"
-  export HEROKU_ORGANIZATION="github-enterprise"
-
-  if quiet_which diff-so-fancy
-  then
-    # shellcheck disable=SC2016
-    export GIT_PAGER='diff-so-fancy | less -+$LESS -RX'
-  else
-    # shellcheck disable=SC2016
-    export GIT_PAGER='less -+$LESS -RX'
-  fi
-
-  if quiet_which exa
-  then
-    alias ls="exa --classify --group --git"
-  else
-    alias ls="ls -F"
-  fi
-
-  if quiet_which bat
-  then
-     export BAT_THEME="ansi-light"
-     alias cat="bat"
-  fi
-
-  if quiet_which prettyping
-  then
-    alias ping="prettyping --nolegend"
-  fi
-
-  if quiet_which htop
-  then
-    alias top="sudo htop"
-  fi
-
-  if quiet_which ncdu
-  then
-    alias du="ncdu --color dark -rr"
-  fi
 
   add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
   add_to_path_end "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
-  alias ql="qlmanage -p 1>/dev/null"
-  alias gitfox="/Applications/Setapp/Gitfox.app/Contents/SharedSupport/bin/gf"
+  alias fork="/Applications/Fork.app/Contents/Resources/fork_cli"
   alias vmrun="/Applications/VMware Fusion.app/Contents/Public/vmrun"
+
   alias locate="mdfind -name"
   alias finder-hide="setfile -a V"
 
-  rbenv-nodenv-homebrew-sync
+  # don't repeated create dock icons
+  quiet_which code && alias code='open -b com.microsoft.VSCode "$@"'
+
+  # make no-argument find Just Work.
+  find() {
+    local arg
+    local path_arg
+    local dot_arg
+
+    for arg
+    do
+      [[ $arg =~ "^-" ]] && break
+      path_arg="$arg"
+    done
+
+    [ -z "$path_arg" ] && dot_arg="."
+
+    command find $dot_arg "$@"
+  }
+
+  # Only run rbenv-nodenv-homebrew-sync if it's not already running
+  pgrep -fq rbenv-nodenv-homebrew-sync || rbenv-nodenv-homebrew-sync
 elif [ "$LINUX" ]
 then
   quiet_which keychain && eval "$(keychain -q --eval --agents ssh id_rsa)"
@@ -190,12 +203,9 @@ then
   add_to_path_end "/data/github/shell/bin"
 
   alias su="/bin/su -"
-  alias ls="ls -F --color=auto"
   alias open="xdg-open"
 elif [ "$WINDOWS" ]
 then
-  alias ls="ls -F --color=auto"
-
   open() {
     # shellcheck disable=SC2145
     cmd /C"$@"
@@ -215,7 +225,6 @@ elif quiet_which vi
 then
   export EDITOR="vi"
 fi
-alias e="$EDITOR"
 
 # Run dircolors if it exists
 quiet_which dircolors && eval "$(dircolors -b)"
@@ -241,7 +250,7 @@ ruby-call-stack() {
 # Pretty-print JSON files
 json() {
   [ -n "$1" ] || return
-  jsonlint "$1" | jq .
+  cat "$1" | jq .
 }
 
 # Pretty-print Homebrew install receipts
@@ -259,4 +268,3 @@ trash() {
 github-api-curl() {
   noglob curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
 }
-alias github-api-curl="noglob github-api-curl"

@@ -1,15 +1,14 @@
 Host *.github.com *.github.net *.githubapp.com
 	ForwardAgent no
 	User weyert
-        UseKeychain yes
-        AddKeysToAgent yes
-        IdentityFile ~/.ssh/id_rsa
+	UseKeychain yes
+	AddKeysToAgent yes
+	IdentityFile ~/.ssh/id_rsa
 
 Host *
 	StrictHostKeyChecking ask
 	VerifyHostKeyDNS ask
 	NoHostAuthenticationForLocalhost yes
-	IdentityFile ~/.ssh/id_rsa_kikkernet
 	IdentityFile ~/.ssh/id_rsa
 	UseKeychain yes
 	AddKeysToAgent yes

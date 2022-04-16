@@ -29,8 +29,4 @@ which mcfly &>/dev/null && eval "$(mcfly init bash)"
 # enable starship (if installed)
 which starship &>/dev/null && eval "$(starship init bash)"
 
-
-# to avoid non-zero exit code
 true
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"

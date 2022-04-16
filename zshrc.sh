@@ -56,6 +56,7 @@ if brew ls --versions zplug > /dev/null; then
 	zplug "zsh-users/zsh-completions"
 	zplug "zsh-users/zsh-syntax-highlighting", defer:2
 	zplug "zsh-users/zsh-history-substring-search", defer:3
+	zplug "andyrichardson/zsh-node-path"
 
 	# Install plugins if there are plugins that have not been installed
 	if ! zplug check --verbose; then
@@ -69,11 +70,8 @@ if brew ls --versions zplug > /dev/null; then
 	zplug load
 fi
 
-# to avoid non-zero exit code
-true
-export VOLTA_HOME="$HOME/.volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
 # tabtab source for packages
 # uninstall by removing these lines
 [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+
+true

@@ -37,14 +37,10 @@ brew "ncdu"
 brew "md5sha1sum"
 brew "mkcert"
 
-brew "node-build"
 brew "node@16"
 brew "deno"
 brew "volta"
 
-brew "nss"
-brew "openconnect"
-brew "overmind"
 brew "kubernetes-cli"
 brew "ansible"
 

@@ -48,8 +48,11 @@ which mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
 # enable zplug
 if brew ls --versions zplug > /dev/null; then
-	export ZPLUG_HOME=/usr/local/opt/zplug
-	source $ZPLUG_HOME/init.zsh
+  	export ZPLUG_HOME=/opt/homebrew/opt/zplug
+  	source $ZPLUG_HOME/init.zsh
+
+	which zplug
+
 	#
 	# Plugins
 	zplug "zsh-users/zsh-autosuggestions"

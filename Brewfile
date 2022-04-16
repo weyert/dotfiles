@@ -64,10 +64,8 @@ brew "ruby@2.6"
 
 brew "shellcheck"
 brew "socat"
-brew "hyperscan"
 brew "softhsm"
 brew "wget"
-brew "zsh-syntax-highlighting"
 brew "starship"
 brew "zplug"
 
@@ -83,6 +81,7 @@ brew "mas"
 brew "packer"
 brew "terraform"
 brew "kustomize"
+brew "podman"
 
 cask "font-fira-code-nerd-font"
 cask "font-ibm-plex"
@@ -105,7 +104,7 @@ cask "duet"
 cask "calibre"
 cask "yacreader"
 cask "openaudible"
-cask "switchaudio-osx"
+brew "switchaudio-osx"
 
 # Internet/Development Tools
 cask "setapp"
@@ -143,11 +142,14 @@ cask "safari-technology-preview"
 cask "brave-browser"
 
 # Design Tools
-cask "rightfont"
 cask "sketch"
 cask "figma"
 cask "sf-symbols"
 cask "craftmanager"
+cask "affinity-photo"
+cask "affinity-designer"
+cask "affinity-publisher"
+
 
 # Apple Products
 mas "iMovie", id: 408981434
@@ -161,7 +163,6 @@ mas "Twitter for Mac", id: 1482454543
 
 # Media
 mas "Receiver Radio", id: 1445434819
-cask "amazon-music"
 cask "spotify"
 
 # Productivity
@@ -173,7 +174,5 @@ mas "PDF Viewer", id: 1475494784
 mas "Dynamo", id: 1445910651
 
 # Content Blockers
-# mas "Better Block", id: 1121192229
-# mas "Wipr", id: 1320666476
 mas "StopTheMadness", id: 1376402589
-mas "1Blocker", id: 1107421413
+mas "1Blocker", id: 1365531024

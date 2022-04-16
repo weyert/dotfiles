@@ -18,7 +18,6 @@ brew "automake"
 brew "bat"
 brew "direnv"
 brew "dive"
-brew "openssl@1.1"
 brew "xz"
 brew "cmake"
 brew "diff-so-fancy"
@@ -116,13 +115,6 @@ cask "little-snitch"
 # cask "sip"
 # cask "bettertouchtool"
 # cask "focus"
-
-# Quick Look utilities
-cask "qlcolorcode"
-cask "qlmarkdown"
-cask "qlstephen"
-cask "quicklook-json"
-cask "webpquicklook"
 
 # Browsers
 cask "firefox"

@@ -17,9 +17,6 @@ echo "Hello $(whoami)! Let's get you set up."
 # Make Chrome Two finger swipe for back and forward
 defaults write com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool TRUE
 
-# Set standby delay to 24 hours (default is 1 hour)
-# sudo pmset -a standbydelay 86400
-
 # Disable the sound effects on boot
 # sudo nvram SystemAudioVolume=" "
 
@@ -52,12 +49,6 @@ defaults write com.apple.helpviewer DevMode -bool true
 # Reveal IP address, hostname, OS version, etc. when clicking the clock
 # in the login window
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-
-# Restart automatically if the computer freezes
-# sudo systemsetup -setrestartfreeze on
-
-# Never go into computer sleep mode
-# sudo systemsetup -setcomputersleep Off > /dev/null
 
 # Disable automatic capitalization as it’s annoying when typing code
 defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
@@ -93,7 +84,7 @@ defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 # defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
 
 # Follow the keyboard focus while zoomed in
-# defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
+defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
@@ -122,13 +113,13 @@ defaults write com.apple.screensaver askForPassword -int 1
 defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 # Save screenshots to the desktop
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+defaults write com.apple.screencapture location -string "${HOME}/Desktop/Screenshots"
 
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
 
 # Disable shadow in screenshots
-# defaults write com.apple.screencapture disable-shadow -bool true
+defaults write com.apple.screencapture disable-shadow -bool true
 
 # Enable subpixel font rendering on non-Apple LCDs
 # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
@@ -229,8 +220,8 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 #/usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:GroupBy Kind" ~/Library/Preferences/com.apple.finder.plist
 
 # Use column view in all Finder windows by default
-# Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`, `Nlsv`
-defaults write com.apple.finder FXPreferredViewStyle -string "clmv"
+# Four-letter codes for the other view modes: `icnv`, `clmv`, `glyv`
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -292,7 +283,7 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 
 # Don’t group windows by application in Mission Control
 # (i.e. use the old Exposé behavior instead)
-# defaults write com.apple.dock expose-group-by-app -bool false
+defaults write com.apple.dock expose-group-by-app -bool false
 
 # Disable Dashboard
 defaults write com.apple.dashboard mcx-disabled -bool true
@@ -310,6 +301,9 @@ defaults write com.apple.dock mru-spaces -bool false
 
 # Automatically hide and show the Dock
 defaults write com.apple.dock autohide -bool true
+
+# Don’t show recent applications in Dock
+ defaults write com.apple.dock show-recents -bool false
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
@@ -340,19 +334,17 @@ defaults write com.apple.dock persistent-others -array-add '{tile-data={}; tile-
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
+# 13: Lock Screen
 # 1048576 is ⌘ I think
-# Top left screen corner → Desktop
-defaults write com.apple.dock wvous-tl-corner -int 4
-defaults write com.apple.dock wvous-tl-modifier -int 1048576
+# Top left screen corner → Mission Control
+ defaults write com.apple.dock wvous-tl-corner -int 2
+ defaults write com.apple.dock wvous-tl-modifier -int 0
 # Top right screen corner → Desktop
 defaults write com.apple.dock wvous-tr-corner -int 4
-defaults write com.apple.dock wvous-tr-modifier -int 1048576
+defaults write com.apple.dock wvous-tr-modifier -int 0
 # Bottom left screen corner → Start screen saver
 defaults write com.apple.dock wvous-bl-corner -int 5
-defaults write com.apple.dock wvous-bl-modifier -int 1048576
-# Bottom right screen corner → Put display to sleep
-defaults write com.apple.dock wvous-br-corner -int 10
-defaults write com.apple.dock wvous-br-modifier -int 1048576
+defaults write com.apple.dock wvous-bl-modifier -int 0
 
 ###############################################################################
 # Safari & WebKit                                                             #
@@ -429,6 +421,7 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Block pop-up windows
 defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
 defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles -bool false
 
 # Disable auto-playing video
 defaults write com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
@@ -733,4 +726,3 @@ for app in "Activity Monitor" \
   killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
-

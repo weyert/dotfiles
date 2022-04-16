@@ -169,6 +169,7 @@ then
   add_to_path_end "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 	add_to_path_start "$HOME/.volta/bin"
+	add_to_path_start "$HOME/.kit/bin"
 
   alias fork="/Applications/Fork.app/Contents/Resources/fork_cli"
   alias vmrun="/Applications/VMware Fusion.app/Contents/Public/vmrun"

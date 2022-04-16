@@ -39,7 +39,6 @@ brew "mkcert"
 
 brew "node-build"
 brew "node@16"
-brew "nodenv"
 brew "deno"
 brew "volta"
 
@@ -105,6 +104,8 @@ cask "duet"
 # Hobbies
 cask "calibre"
 cask "yacreader"
+cask "openaudible"
+cask "switchaudio-osx"
 
 # Internet/Development Tools
 cask "setapp"
@@ -162,18 +163,17 @@ mas "Twitter for Mac", id: 1482454543
 mas "Receiver Radio", id: 1445434819
 cask "amazon-music"
 cask "spotify"
-cask "vlc"
 
 # Productivity
 mas "Magnet", id: 441258766
-mas "iWriter Pro", id: 893199093
+# mas "iWriter Pro", id: 893199093
 mas "PDF Viewer", id: 1475494784
 
 # Utilities
 mas "Dynamo", id: 1445910651
 
 # Content Blockers
-mas "Better Block", id: 1121192229
-mas "Wipr", id: 1320666476
+# mas "Better Block", id: 1121192229
+# mas "Wipr", id: 1320666476
 mas "StopTheMadness", id: 1376402589
 mas "1Blocker", id: 1107421413

@@ -8,6 +8,8 @@ tap "homebrew/formula-analytics"
 tap "homebrew/services"
 tap "homebrew/test-bot"
 
+# SVN  is not bundled with Montery anymore (and needed for some Brew)
+brew "svn"
 brew "git"
 brew "git-filter-repo"
 brew "go"
@@ -86,6 +88,7 @@ brew "kustomize"
 cask "font-fira-code-nerd-font"
 cask "font-ibm-plex"
 cask "font-ibm-plex-mono"
+cask "font-blex-mono-nerd-font"
 
 cask "alfred"
 cask "1password"
@@ -101,20 +104,16 @@ cask "duet"
 
 # Hobbies
 cask "calibre"
-cask "simple-comic"
 cask "yacreader"
 
 # Internet/Development Tools
 cask "setapp"
-# cask "insomnia"
-# cask "charles"
 cask "android-studio"
 cask "vmware-fusion"
 cask "visual-studio-code"
 cask "visual-studio-code-insiders"
 cask "sourcetree"
 cask "docker"
-cask "vmware-fusion"
 cask "google-cloud-sdk"
 
 # Firewall/Security
@@ -126,7 +125,6 @@ cask "little-snitch"
 # cask "focus"
 
 # Quick Look utilities
-# cask "betterzip"
 cask "qlcolorcode"
 cask "qlmarkdown"
 cask "qlstephen"
@@ -144,7 +142,6 @@ cask "safari-technology-preview"
 cask "brave-browser"
 
 # Design Tools
-# cask "google-nik-collection"
 cask "rightfont"
 cask "sketch"
 cask "figma"
@@ -162,7 +159,6 @@ mas "Xcode", id: 497799835
 mas "Twitter for Mac", id: 1482454543
 
 # Media
-# mas "Radium", id: 597611879
 mas "Receiver Radio", id: 1445434819
 cask "amazon-music"
 cask "spotify"
@@ -174,7 +170,6 @@ mas "iWriter Pro", id: 893199093
 mas "PDF Viewer", id: 1475494784
 
 # Utilities
-# mas "Microsoft To Do", id: 1274495053
 mas "Dynamo", id: 1445910651
 
 # Content Blockers

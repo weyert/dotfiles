@@ -17,6 +17,7 @@ brew "ack"
 brew "automake"
 brew "bat"
 brew "direnv"
+brew "asdf"
 brew "dive"
 brew "xz"
 brew "cmake"
@@ -33,12 +34,11 @@ brew "gnupg"
 brew "grc"
 brew "htop"
 brew "ncdu"
-brew "md5sha1sum"
 brew "mkcert"
 
-brew "node@16"
+brew "node@20"
 brew "deno"
-brew "volta"
+brew "bun"
 
 brew "kubernetes-cli"
 brew "ansible"
@@ -74,6 +74,7 @@ brew "packer"
 brew "terraform"
 brew "kustomize"
 brew "podman"
+cask "podman-desktop"
 
 cask "font-fira-code-nerd-font"
 cask "font-ibm-plex"
@@ -89,14 +90,13 @@ cask "transmission"
 # Utilities
 cask "avibrazil-rdm"
 cask "iterm2"
+cask "warp"
 cask "contexts"
-cask "duet"
 
 # Hobbies
 cask "calibre"
 cask "yacreader"
 cask "openaudible"
-brew "switchaudio-osx"
 
 # Internet/Development Tools
 cask "setapp"
@@ -107,14 +107,6 @@ cask "visual-studio-code-insiders"
 cask "sourcetree"
 cask "docker"
 cask "google-cloud-sdk"
-
-# Firewall/Security
-cask "little-snitch"
-
-# Installed via Setapp
-# cask "sip"
-# cask "bettertouchtool"
-# cask "focus"
 
 # Browsers
 cask "firefox"
@@ -127,33 +119,24 @@ cask "safari-technology-preview"
 cask "brave-browser"
 
 # Design Tools
-cask "sketch"
 cask "figma"
 cask "sf-symbols"
-cask "craftmanager"
 cask "affinity-photo"
 cask "affinity-designer"
 cask "affinity-publisher"
 
-
 # Apple Products
-mas "iMovie", id: 408981434
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Xcode", id: 497799835
 
-# Social Media
-mas "Twitter for Mac", id: 1482454543
-
 # Media
 mas "Receiver Radio", id: 1445434819
 cask "spotify"
-
-# Productivity
-mas "Magnet", id: 441258766
-# mas "iWriter Pro", id: 893199093
-mas "PDF Viewer", id: 1475494784
+cask "audio-hijack"
+cask "loopback"
+cask "SoundSource"
 
 # Utilities
 mas "Dynamo", id: 1445910651

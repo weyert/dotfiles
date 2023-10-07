@@ -1,0 +1,5 @@
+direnv 2.32.3
+nodejs 20.8.0
+pnpm 8.8.0
+golang 1.21.2
+rust 1.73.0

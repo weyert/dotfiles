@@ -59,6 +59,7 @@ if brew ls --versions zplug > /dev/null; then
 	zplug "zsh-users/zsh-completions"
 	zplug "zsh-users/zsh-syntax-highlighting", defer:2
 	zplug "zsh-users/zsh-history-substring-search", defer:3
+	zplug "kiurchv/asdf.plugin.zsh", defer:2
 	zplug "andyrichardson/zsh-node-path"
 
 	# Install plugins if there are plugins that have not been installed

@@ -3,6 +3,7 @@
 
 cd $(dirname $0)/..
 
+scripts/install-asdf-plugins
 script/install-node
 script/extract-onepassword-secrets
 script/install-vscode-extensions

@@ -9,19 +9,6 @@
 [color]
 	# Colour terminal command output when possible.
 	ui = auto
-[color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-[color "diff"]
-	meta = yellow bold
-	frag = magenta bold # line info
-	old = red # deletions
-	new = green # additions
-[color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
 [gist]
 	# Open GitHub Gist in browser after submission.
 	browse = true
@@ -31,25 +18,28 @@
 [pull]
 	# Default to rebasing on pulls
 	rebase = true
-[branch]
-  autosetuprebase = always
 [fetch]
 	# Always prune when fetching (and pulling).
-	prune = 1
+	prune = true
+	# Write commit graph to speed up some repositories.
+	writeCommitGraph = true
+[gc]
+	# Write commit graph to speed up some repositories.
+	writeCommitGraph = true
 [rerere]
 	# Store and re-use manual conflict resolution changes.
-	enabled = 1
+	enabled = true
 [core]
 	# Exclude everything this file. Used for general exclusions.
-	excludesfile = /Users/weyertdeboer/.gitignore
+	excludesfile = ~/.gitignore
 	# Set attributes on files. Used for general diff improvements.
 	attributesfile = ~/.gitattributes
 	# Don't prompt for commit messages for merge commits.
 	mergeoptions = --no-edit
 	commitGraph = true
-	pager = diff-so-fancy | less --tabs=4 -RFX
 	# Output unicode characters (e.g. emoji).
-     	quotepath = on
+  quotepath = on
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [help]
   # Autocorrect mistyped commands.
 	autocorrect = 1
@@ -80,15 +70,15 @@
 	# always using that branch's version rather than the current branch.
 	theirs = !git noff -Xtheirs
 	# Fetch all branches and rebase the current branch against
-	# upstream/master.
-	rebase-against-master = !git fetch --all \
-	                      && git rebase $(git upstream)/master
+	# upstream/HEAD.
+	rebase-against-head = !git fetch --all \
+	                      && git rebase $(git upstream)/HEAD
 	# Push the current branch upstream to origin using the same branch
 	# name for the remote branch.
 	upstream-current-branch = !git push --set-upstream origin \
 	                         $(git current-branch)
-	# Create a pull request on GitHub using the `hub` command.
-	pull-request = !rm -f .git/PULLREQ_EDITMSG && hub pull-request -o
+	# Create a pull request on GitHub using the `gh` command.
+	pull-request = !rm -f .git/PULLREQ_EDITMSG && gh pr create --web
 	# Upstream the current branch to origin and create a pull request
 	# on GitHub.
 	upstream-and-pull-request = !git upstream-current-branch \
@@ -100,18 +90,17 @@
 	push-and-set-upstream = push --set-upstream
 	# Create a new branch by checking out another branch.
 	checkout-as-new-branch = checkout -b
-	# Rebase against origin/master and prompt for what operations
+	# Rebase against origin/HEAD and prompt for what operations
 	# should be performed.
-	interactively-rebase-against-origin-master = \
-	  !git rebase --interactive origin/master
+	interactively-rebase-against-origin-head = \
+	  !git rev-parse --verify --quiet origin/HEAD >/dev/null || git remote set-head origin --auto && \
+		 git rebase --interactive origin/HEAD
 	# Show the commit log with a prettier, clearer history.
 	pretty-one-line-log = log --graph --oneline --decorate
 	# Commit any changes to files, squash them into the last commit
 	# and update its date.
 	fix-up-previous-commit = !git commit --all --amend \
 	                              --reuse-message=HEAD --date=\"$(date)\" #"
-	# Checkout the master branch and update it.
-	pull-master = !git checkout master && git pull
 	# Commit a work-in-progress commit (to use with
 	# fix-up-previous-commit)
 	work-in-progress = commit -a -m 'WIP'
@@ -127,87 +116,51 @@
 	unassume = update-index --no-assume-unchanged
 	# List all files that are assumed to be unchanged
 	assumed = !git ls-files -v | grep '^[hsmrck?]' | cut -c 3-
-	# Delete all non-master branches
-	delete-merged = !git branch --merged | grep -v 'master' | grep -v '*' | xargs -n 1 git branch -D
-	# Get the merge-base compared to origin/master
-	merge-base-master = merge-base origin/master HEAD
+	# Delete all non-master/main branches
+	delete-merged = !git branch --merged | grep -v 'master' | grep -v 'main' | grep -v '*' | xargs -n 1 git branch -D
+	# Get the merge-base compared to origin/HEAD
+	merge-base-head = merge-base origin/HEAD HEAD
 	# Diff against the current branch's merge-base
-	diff-merge-base = !git diff $(git merge-base-master)
+	diff-merge-base = !git diff $(git merge-base-head)
+	# `brew style` changed files
+	brew-style-changed = !git diff origin/HEAD --name-only | xargs brew style --fix --display-cop-names
 
 	# Push the current branch upstream to MikeMcQuaid using the same
 	# branch name for the remote branch.
-	um = !(git remote -v | grep -q MikeMcQuaid || hub fork) \
+	um = !(git remote -v | grep -q MikeMcQuaid || gh repo fork --remote --remote-name MikeMcQuaid) \
+	    && gh repo set-default $(git remote get-url origin) \
 	    && git push --set-upstream MikeMcQuaid $(git current-branch)
 	# Push the current branch to MikeMcQuaid and open a pull request.
-	umpr = !git um && hub pull-request -o
+	umpr = !git um && gh pr create --web --head MikeMcQuaid:$(git current-branch)
 
 	## Shortened 'New' Commands
 	fahr = !git fetch --all && git hard-reset
-	rem = !git rebase-against-master
+	rem = !git rebase-against-head
 	wip = !git work-in-progress
 	pr = !git upstream-and-pull-request
 	up = !git upstream-current-branch
 	fa = !git fetch --all
 	pf = !git push --force-with-lease
 	dm = !git diff-merge-base
-	mb = !git merge-base-master
+	mb = !git merge-base-head
 	w = !git word-diff
 	u = !git push-and-set-upstream
 	b = !git checkout-as-new-branch
-	i = !git interactively-rebase-against-origin-master
+	i = !git interactively-rebase-against-origin-head
 	# `true` needed as the return status is wrong otherwise.
 	l = !git pretty-one-line-log || true
-	# View abbreviated SHA, description, and history graph of the latest 20 commits
-	ll = log --pretty=oneline -n 20 --graph --abbrev-commit
 	f = !git fix-up-previous-commit
-
-	# View the current working tree status using the short format
-
-# Show verbose output about tags, branches or remotes
-	tags = tag -l
-	branches = branch -a
-	remotes = remote -v
-
-	# Amend the currently staged files to the latest commit
-	amend = commit --amend --reuse-message=HEAD
-
-	# Credit an author on the latest commit
-	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
-
-	# Interactive rebase with the given number of latest commits
-	reb = "!r() { git rebase -i HEAD~$1; }; r"
-
-	# Find branches containing commit
-	fb = "!f() { git branch -a --contains $1; }; f"
-
-	# Find tags containing commit
-	ft = "!f() { git describe --always --contains $1; }; f"
-
-	# Find commits by source code
-	fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
-
-	# Find commits by commit message
-	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
-
-	# Remove branches that have already been merged with master
-	# a.k.a. ‘delete merged’
-	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
-
-	# List contributors with number of commits
-	contributors = shortlog --summary --numbered
 
 	## Shortened Existing Commands
 	p = pull
 	s = status --short --branch
-[instaweb]
-	# Use the Ruby WEBRick library when creating a `git instaweb`
-	# HTTP server.
-	httpd = webrick
 [diff]
 	# Use the slower but better patience diff algorithm
 	algorithm = patience
 	# Use new diff algorithm to make e.g. function diffs look better.
 	compactionheuristic = true
+	# Use a different colour for moved lines than added/modified ones
+	colorMoved = default
 [diff "xml"]
 	textconv = xmllint --format --recover
 [mergetool]
@@ -228,24 +181,14 @@
 
 # URL shorthands
 [url "git@github.com:"]
-	insteadOf = "gh:"
-	pushInsteadOf = "github:"
-	pushInsteadOf = "git://github.com/"
-
-[url "git://github.com/"]
-	insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-	insteadOf = "gst:"
-	pushInsteadOf = "gist:"
-	pushInsteadOf = "git://gist.github.com/"
-
-[url "git://gist.github.com/"]
-	insteadOf = "gist:"
-
+	# Use SSH for GitHub instead of https://
+	# Enable this in networks where https:// has issues.
+	# insteadOf = https://github.com/
 [credential]
-	# Use macOS Keychain to store HTTP passwords.
-	helper = osxkeychain
+	# Use my custom dotfiles credentials helper.
+	helper = dotfiles
+[credential "https://github.com"]
+	username = weyert
 [hub]
 	# Use HTTPS rather than SSH protocol in Hub
 	protocol = https
@@ -259,26 +202,36 @@
 	# Show the diff as a comment in the commit message template.
 	verbose = true
 	# Sign commits with GPG
-	gpgsign = false
-	template = /Users/weyertdeboer/.stCommitMsg
+	gpgsign = true
+[gpg]
+	# Use my custom dotfiles Codespaces GPG helper.
+	program = git-gpg-dotfiles
 [tag]
 	# Sort tags by newest first
 	sort = -version:refname
 [protocol]
 	# Use Git v2 protocol for better performance
-	# TODO: re-enable when more widely supported by Git versions
-	# version = 2
+	version = 2
 [log]
 	# Print more readable dates in `git log`
-	# TODO: re-enable when more widely supported by Git versions
-	# date = human
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[gpg]
-	program = gpg2
+	date = human
+# git-delta settings
+[delta]
+	features = line-numbers decorations
+	syntax-theme = GitHub
+	file-decoration-style = ''
+	hunk-header-decoration-style = ''
+[merge]
+	# Use 3-way diffs.
+	conflictstyle = diff3
+[checkout]
+	# If in doubt about the branch to checkout, pick origin.
+	defaultRemote = origin
 [init]
+	# Use same default branch name as GitHub.
 	defaultBranch = main
+[safe]
+	directory = /opt/homebrew
+	directory = /opt/homebrew/Library/Taps/homebrew/homebrew-core
+	directory = /opt/homebrew/Library/Taps/homebrew/homebrew-cask
+	directory = /opt/homebrew/Library/Taps/homebrew/homebrew-services

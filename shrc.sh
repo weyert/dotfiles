@@ -49,136 +49,119 @@ quiet_which() {
   command -v "$1" >/dev/null
 }
 
-add_to_path_start "/home/linuxbrew/.linuxbrew/bin"
-add_to_path_start "/usr/local/bin"
-add_to_path_start "/opt/homebrew/bin"
+if [[ -n "${MACOS}" ]]; then
+  add_to_path_start "/opt/homebrew/bin"
+  add_to_path_start "/opt/workbrew/bin"
+elif [[ -n "${LINUX}" ]]; then
+  add_to_path_start "/home/linuxbrew/.linuxbrew/bin"
+fi
 
-add_to_path_end "$HOME/.dotfiles/bin"
-add_to_path_end "$HOME/.gem/ruby/2.6.0/bin"
+add_to_path_start "/usr/local/bin"
+add_to_path_end "${HOME}/.dotfiles/bin"
 
 # Setup Go development
-export GOPATH="$HOME/.gopath"
-add_to_path_end "$GOPATH/bin"
-
-# Run rbenv if it exists
-quiet_which rbenv && add_to_path_start "$(rbenv root)/shims"
-
-# enable starship (if installed)
-which starship &>/dev/null && eval "$(starship init zsh)"
+export GOPATH="${HOME}/.gopath"
+add_to_path_end "${GOPATH}/bin"
 
 # Aliases
 alias mkdir="mkdir -vp"
 alias df="df -H"
 alias rm="rm -iv"
 alias mv="mv -iv"
-alias zmv="noglob zmv -vW"
 alias cp="cp -irv"
 alias du="du -sh"
 alias make="nice make"
 alias less="less --ignore-case --raw-control-chars"
 alias rsync="rsync --partial --progress --human-readable --compress"
-alias rake="noglob rake"
 alias rg="rg --colors 'match:style:nobold' --colors 'path:style:nobold'"
-alias be="nocorrect noglob bundle exec"
+alias be="bundle exec"
 alias sha256="shasum -a 256"
+alias perlsed="perl -p -e"
 
 # Command-specific stuff
-if quiet_which brew
-then
-  eval $(brew shellenv)
+if quiet_which brew; then
+  eval "$(brew shellenv)"
 
-  export HOMEBREW_AUTO_UPDATE_SECS=3600
   export HOMEBREW_DEVELOPER=1
-  export HOMEBREW_UPDATE_REPORT_ONLY_INSTALLED=1
-  export HOMEBREW_GIT_FILTER_TREE_ZERO=1
   export HOMEBREW_BOOTSNAP=1
+  export HOMEBREW_BUNDLE_INSTALL_CLEANUP=1
+  export HOMEBREW_BUNDLE_DUMP_DESCRIBE=1
+  export HOMEBREW_NO_ENV_HINTS=1
+  export HOMEBREW_AUTOREMOVE=1
+  export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=1
+  export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
+  export HOMEBREW_SORBET_RUNTIME=1
+
+  add_to_path_end "${HOMEBREW_PREFIX}/Library/Homebrew/shims/gems"
+
+  # Specifically want this to expand when defined, not when run.
+  # shellcheck disable=SC2139
+  alias homebrew="${HOMEBREW_PREFIX}/bin/brew"
+  alias workbrew='/opt/workbrew/bin/brew'
+  alias workbrewdo='sudo --set-home --preserve-env --user=workbrew --'
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
-  alias intelbrew='arch -x86_64 /usr/local/bin/brew'
 fi
 
-if quiet_which git-delta
-then
+if quiet_which delta; then
   export GIT_PAGER='delta'
 else
   # shellcheck disable=SC2016
   export GIT_PAGER='less -+$LESS -RX'
 fi
 
-if quiet_which exa
-then
-  alias ls="exa --classify --group --git"
-elif [ "$MACOS" ]
-then
+if quiet_which eza; then
+  alias ls="eza --classify --group --git"
+elif [[ -n "${MACOS}" ]]; then
   alias ls="ls -F"
 else
   alias ls="ls -F --color=auto"
 fi
 
-if quiet_which bat
-then
-  export BAT_THEME="ansi"
-  alias cat="bat"
-fi
+# if quiet_which bat; then
+#   export BAT_THEME="ansi"
+#   alias cat="bat"
+#   export HOMEBREW_BAT=1
+# fi
 
-if quiet_which prettyping
-then
+if quiet_which prettyping; then
   alias ping="prettyping --nolegend"
 fi
 
-if quiet_which htop
-then
+if quiet_which htop; then
   alias top="sudo htop"
 fi
 
-if quiet_which dust
-then
-  alias du="dust"
-fi
-
-if quiet_which duf
-then
-  alias df="duf"
-fi
-
-if quiet_which mcfly
-then
-  export MCFLY_LIGHT=TRUE
-  export MCFLY_FUZZY=true
-  export MCFLY_RESULTS=64
-fi
-
-
-
 # Configure environment
 export CLICOLOR=1
-export HEROKU_ORGANIZATION="github-enterprise"
 export GITHUB_PROFILE_BOOTSTRAP=1
 export GITHUB_PACKAGES_SUBPROJECT_CACHE_READ=1
+export GITHUB_NO_AUTO_BOOTSTRAP=1
 
 # OS-specific configuration
-if [ "$MACOS" ]
-then
-  export GITHUB_USE_HOMEBREW_BINARIES=1
-  export HOMEBREW_GITHUB_USE_HOMEBREW_BINARIES=1
-  export GITHUB_NO_AUTO_BOOTSTRAP=1
+if [[ -n "${MACOS}" ]]; then
   export GREP_OPTIONS="--color=auto"
   export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
 
-  add_to_path_end "$HOMEBREW_PREFIX/opt/git/share/git-core/contrib/diff-highlight"
+  add_to_path_end "${HOMEBREW_PREFIX}/opt/git/share/git-core/contrib/diff-highlight"
   add_to_path_end "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-
-	add_to_path_start "$HOME/.volta/bin"
-	add_to_path_start "$HOME/.kit/bin"
-
-  alias fork="/Applications/Fork.app/Contents/Resources/fork_cli"
-  alias vmrun="/Applications/VMware Fusion.app/Contents/Public/vmrun"
 
   alias locate="mdfind -name"
   alias finder-hide="setfile -a V"
 
-  # don't repeated create dock icons
-  quiet_which code && alias code='open -b com.microsoft.VSCode "$@"'
+  # Load GITHUB_TOKEN from macOS keychain
+  # export GITHUB_TOKEN=$(
+  #   printf "protocol=https\\nhost=github.com\\n" |
+  #     git credential fill |
+  #     perl -lne '/password=(gho_.+)/ && print "$1"'
+  # )
+  # export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
+  # export JEKYLL_GITHUB_TOKEN="${GITHUB_TOKEN}"
+
+  # output what's listening on the supplied port
+  on-port() {
+    sudo lsof -nP -i4TCP:"$1"
+  }
 
   # make no-argument find Just Work.
   find() {
@@ -186,59 +169,91 @@ then
     local path_arg
     local dot_arg
 
-    for arg
-    do
-      [[ $arg =~ "^-" ]] && break
-      path_arg="$arg"
+    for arg; do
+      [[ ${arg} =~ "^-" ]] && break
+      path_arg="${arg}"
     done
 
-    [ -z "$path_arg" ] && dot_arg="."
+    [[ -z "${path_arg}" ]] && dot_arg="."
 
-    command find $dot_arg "$@"
+    command find "${dot_arg}" "$@"
   }
-elif [ "$LINUX" ]
-then
+
+  # Only run this if it's not already running
+  pgrep -fq touchid-enable-pam-sudo || touchid-enable-pam-sudo --quiet
+elif [[ -n "${LINUX}" ]]; then
   quiet_which keychain && eval "$(keychain -q --eval --agents ssh id_rsa)"
 
-  add_to_path_end "/data/github/shell/bin"
+  # Run dircolors if it exists
+  quiet_which dircolors && eval "$(dircolors -b)"
 
   alias su="/bin/su -"
   alias open="xdg-open"
-elif [ "$WINDOWS" ]
-then
+elif [[ -n "${WINDOWS}" ]]; then
   open() {
     # shellcheck disable=SC2145
     cmd /C"$@"
   }
 fi
 
-# Set up editor
-if quiet_which code
-then
-  export EDITOR="code"
-  export GIT_EDITOR="$EDITOR -w"
-  export SVN_EDITOR="$GIT_EDITOR"
-elif quiet_which vim
-then
-  export EDITOR="vim"
-elif quiet_which vi
-then
-  export EDITOR="vi"
+# Run rbenv/nodenv if they exist
+if quiet_which rbenv; then
+  shims="$(rbenv root)/shims"
+  if ! [[ -d "${shims}" ]]; then
+    rbenv rehash
+  fi
+  add_to_path_start "${shims}"
 fi
 
-# Run dircolors if it exists
-quiet_which dircolors && eval "$(dircolors -b)"
+if quiet_which nodenv; then
+  shims="$(nodenv root)/shims"
+  if ! [[ -d "${shims}" ]]; then
+    nodenv rehash
+  fi
+  add_to_path_start "${shims}"
+fi
 
-# More colours with grc
-# shellcheck disable=SC1090
-[ -f "$HOMEBREW_PREFIX/etc/grc.bashrc" ] && source "$HOMEBREW_PREFIX/etc/grc.bashrc"
+# Set up editor
+if quiet_which code; then
+  export EDITOR="code"
+  export GIT_EDITOR="${EDITOR} -w"
+  export SVN_EDITOR="${GIT_EDITOR}"
+
+  code() {
+    local arg
+
+    # mkdir/touch any files that don't exist because the `open` hack doesn't work for them.
+    for arg; do
+      [[ -e "${arg}" ]] && break
+
+      command mkdir -p "$(dirname "${arg}")"
+      touch "${arg}"
+    done
+
+    open -b "com.microsoft.VSCode" "$@"
+  }
+
+  # Edit Rails credentials in VSCode
+  rails-credentials-edit-production() {
+    EDITOR="code -w" bundle exec rails credentials:edit --environment production
+  }
+  rails-credentials-edit-development() {
+    EDITOR="code -w" bundle exec rails credentials:edit --environment development
+  }
+else
+  export EDITOR="vim"
+fi
+
+# Load secrets
+[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
+
 
 # Save directory changes
 cd() {
   builtin cd "$@" || return
-  [ "$TERMINALAPP" ] && command -v set_terminal_app_pwd >/dev/null \
-    && set_terminal_app_pwd
-  pwd > "$HOME/.lastpwd"
+  [[ -n "${TERMINALAPP}" ]] && command -v set_terminal_app_pwd >/dev/null &&
+    set_terminal_app_pwd
+  pwd >"${HOME}/.lastpwd"
   ls
 }
 
@@ -249,22 +264,32 @@ ruby-call-stack() {
 
 # Pretty-print JSON files
 json() {
-  [ -n "$1" ] || return
+  [[ -n "$1" ]] || return
   cat "$1" | jq .
 }
 
 # Pretty-print Homebrew install receipts
 receipt() {
-  [ -n "$1" ] || return
-  json "$HOMEBREW_PREFIX/opt/$1/INSTALL_RECEIPT.json"
+  [[ -n "$1" ]] || return
+  json "${HOMEBREW_PREFIX}/opt/$1/INSTALL_RECEIPT.json"
 }
 
 # Move files to the Trash folder
 trash() {
-  mv "$@" "$HOME/.Trash/"
+  mv "$@" "${HOME}/.Trash/"
 }
 
 # GitHub API shortcut
 github-api-curl() {
-  noglob curl -H "Authorization: token $GITHUB_TOKEN" "https://api.github.com/$1"
+  curl -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/$1" | jq .
+}
+
+# Spit out Okta keychain password
+okta-keychain() {
+  security find-generic-password -l device_trust '-w'
+}
+
+# Clear entire screen buffer
+clearer() {
+  tput reset
 }

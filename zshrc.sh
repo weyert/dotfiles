@@ -46,12 +46,28 @@ which direnv &>/dev/null && eval "$(direnv hook zsh)"
 # enable mcfly (if installed)
 which mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
+asdf_dir="$(brew --prefix asdf)/libexec"
+if [[ -d $asdf_dir ]]; then
+  source $asdf_dir/asdf.sh
+  if [[ -f $asdf_dir/completions/asdf.bash ]]; then
+	  source $asdf_dir/completions/asdf.bash
+  fi
+fi
+
+# More colours with grc
+# shellcheck disable=SC1090
+GRC_ZSH="$HOMEBREW_PREFIX/etc/grc.zsh"
+[ -f "$GRC_ZSH" ] && source "$GRC_ZSH"
+
+# zsh-specific aliases
+alias zmv="noglob zmv -vW"
+alias rake="noglob rake"
+alias be="nocorrect noglob bundle exec"
+
 # enable zplug
 if brew ls --versions zplug > /dev/null; then
-  	export ZPLUG_HOME=/opt/homebrew/opt/zplug
-  	source $ZPLUG_HOME/init.zsh
-
-	which zplug
+	export ZPLUG_HOME=/opt/homebrew/opt/zplug
+	source $ZPLUG_HOME/init.zsh
 
 	#
 	# Plugins
@@ -59,8 +75,6 @@ if brew ls --versions zplug > /dev/null; then
 	zplug "zsh-users/zsh-completions"
 	zplug "zsh-users/zsh-syntax-highlighting", defer:2
 	zplug "zsh-users/zsh-history-substring-search", defer:3
-	zplug "kiurchv/asdf.plugin.zsh", defer:2
-	zplug "andyrichardson/zsh-node-path"
 
 	# Install plugins if there are plugins that have not been installed
 	if ! zplug check --verbose; then
@@ -74,8 +88,13 @@ if brew ls --versions zplug > /dev/null; then
 	zplug load
 fi
 
-# tabtab source for packages
-# uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
+# to avoid non-zero exit code
 true
+
+# pnpm
+export PNPM_HOME="/Users/weyertdeboer/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

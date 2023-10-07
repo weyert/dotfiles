@@ -3,7 +3,6 @@ umask 022
 
 # Save more history
 export HISTSIZE="100000"
-export HISTFILESIZE="${HISTSIZE}";
 export SAVEHIST="100000"
 
 # OS variables
@@ -16,51 +15,36 @@ grep -q "Microsoft" /proc/version 2>/dev/null && export UBUNTU_ON_WINDOWS=1
 [ -z "$USER" ] && export USER="$(whoami)"
 
 # Count CPUs for Make jobs
-if [ $MACOS ]
-then
+if [ $MACOS ]; then
   export CPUCOUNT="$(sysctl -n hw.ncpu)"
-elif [ $LINUX ]
-then
+elif [ $LINUX ]; then
   export CPUCOUNT="$(getconf _NPROCESSORS_ONLN)"
 else
   export CPUCOUNT=1
 fi
 
-if [ "$CPUCOUNT" -gt 1 ]
-then
+
+if [ "$CPUCOUNT" -gt 1 ]; then
   export MAKEFLAGS="-j$CPUCOUNT"
   export BUNDLE_JOBS="$CPUCOUNT"
 fi
 
+# Setup Homebrew
+PATH="/home/linuxbrew/.linuxbrew/bin:/opt/homebrew/bin:/usr/local/bin:$PATH"
+if which brew &>/dev/null; then
+  eval "$(brew shellenv)"
+fi
+
 # Enable Terminal.app folder icons
 [ "$TERM_PROGRAM" = "Apple_Terminal" ] && export TERMINALAPP=1
-if [ $TERMINALAPP ]
-then
+if [ $TERMINALAPP ]; then
   set_terminal_app_pwd() {
     # Tell Terminal.app about each directory change.
     printf '\e]7;%s\a' "$(echo "file://$HOST$PWD" | sed -e 's/ /%20/g')"
   }
 fi
-[ -s ~/.lastpwd ] && [ "$PWD" = "$HOME" ] && \
+[ -s ~/.lastpwd ] && [ "$PWD" = "$HOME" ] &&
   builtin cd "$(cat ~/.lastpwd)" 2>/dev/null
 [ $TERMINALAPP ] && set_terminal_app_pwd
-
-# Load secrets
-[ -f "$HOME/.secrets" ] && source "$HOME/.secrets"
-
-# Load GITHUB_TOKEN from macOS keychain
-#if [ $MACOS ]
-#then
-#  export GITHUB_TOKEN=$(
-#    printf "protocol=https\\nhost=github.com\\n" \
-#    | git credential fill \
-#    | perl -lne '/password=(gho_.+)/ && print "$1"'
-#  )
-#fi
-
-# Some post-secret aliases
-export HOMEBREW_GITHUB_TOKEN="$GITHUB_TOKEN"
-export HUBOT_GITHUB_TOKEN="$GITHUB_TOKEN"
-export OCTOKIT_ACCESS_TOKEN="$GITHUB_TOKEN"
 
 SHPROFILE_LOADED=1

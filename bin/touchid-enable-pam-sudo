@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+# Enables sudo authentication using TouchID.
+
+pam_sudo_filename = "/etc/pam.d/sudo_local"
+pam_sudo_contents = File.read(pam_sudo_filename)
+if pam_sudo_contents.include?("pam_tid.so")
+  unless ARGV.include?("--quiet")
+    puts "TouchID PAM sudo module already enabled!"
+  end
+  exit
+end
+
+first_line = "# sudo_local: local config file which survives system update and is included for sudo"
+first_line_regex = /^#{first_line}$/
+unless pam_sudo_contents.match?(first_line_regex)
+  warn "Error: #{pam_sudo_filename} is not in the expected format!"
+  abort
+end
+
+if Process.uid != 0
+  puts "Rerunning #{$0} with sudo..."
+  exec "sudo", $0
+end
+
+pam_sudo_contents.sub!(
+  first_line_regex,
+  "#{first_line}\nauth       sufficient     pam_tid.so"
+)
+
+File.write(pam_sudo_filename, pam_sudo_contents)
+puts "TouchID PAM sudo module now enabled!"

@@ -43,3 +43,6 @@ export RPROMPT='%{$fg_bold[red]%}$(git_branch)%b[%{$fg_bold[blue]%}%~%b%f]'
 
 # more macOS/Bash-like word jumps
 export WORDCHARS=""
+
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :

@@ -1,0 +1,6 @@
+[user]
+    name = Weyert de Boer
+    email = weyert.deboer@fnz.com
+
+[commit]
+    gpgsign = false

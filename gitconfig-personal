@@ -1,0 +1,6 @@
+[user]
+    name = Weyert de Boer
+    email = weyert@gmail.com
+
+[commit]
+    gpgsign = false

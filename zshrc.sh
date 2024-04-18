@@ -41,17 +41,24 @@ ZSH_AUTOSUGGESTIONS="$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggesti
 [ -f "$ZSH_AUTOSUGGESTIONS" ] && source "$ZSH_AUTOSUGGESTIONS"
 
 # enable direnv (if installed)
+export DIRENV_LOG_FORMAT="$(printf "\033[2mdirenv: %%s\033[0m")"
 which direnv &>/dev/null && eval "$(direnv hook zsh)"
+_direnv_hook() {
+	eval "$(direnv export zsh 2> >(egrep -v -e '^....direnv: export' >&2))"
+}
 
 # enable mcfly (if installed)
 which mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
 asdf_dir="$(brew --prefix asdf)/libexec"
 if [[ -d $asdf_dir ]]; then
-  source $asdf_dir/asdf.sh
-  if [[ -f $asdf_dir/completions/asdf.bash ]]; then
-	  source $asdf_dir/completions/asdf.bash
-  fi
+	source $asdf_dir/asdf.sh
+	if [[ -f $asdf_dir/completions/asdf.bash ]]; then
+		source $asdf_dir/completions/asdf.bash
+	fi
+
+	# Set the path of `node-build` to ASDF's node-build
+	export NODE_BUILD_DEFINITIONS="$HOME/.asdf/plugins/nodejs/.node-build/share/node-build"
 fi
 
 # More colours with grc
@@ -65,7 +72,7 @@ alias rake="noglob rake"
 alias be="nocorrect noglob bundle exec"
 
 # enable zplug
-if brew ls --versions zplug > /dev/null; then
+if brew ls --versions zplug >/dev/null; then
 	export ZPLUG_HOME=/opt/homebrew/opt/zplug
 	source $ZPLUG_HOME/init.zsh
 
@@ -80,7 +87,8 @@ if brew ls --versions zplug > /dev/null; then
 	if ! zplug check --verbose; then
 		printf "Install? [y/N]: "
 		if read -q; then
-			echo; zplug install
+			echo
+			zplug install
 		fi
 	fi
 
@@ -88,13 +96,29 @@ if brew ls --versions zplug > /dev/null; then
 	zplug load
 fi
 
-# to avoid non-zero exit code
-true
+# Add LLVM to path
+export PATH="$PATH:$(brew --prefix llvm@16)/bin"
+export LDFLAGS="$LDFLAGS -L$(brew --prefix llvm@16)/lib"
+export CPPFLAGS="$CPPFLAGS -I$(brew --prefix llvm@16)/include"
 
 # pnpm
 export PNPM_HOME="/Users/weyertdeboer/Library/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+# bun developer build
+export BUN_DEBUG_INSTAL="$HOME/Development/Projects/Opensource/bun/packages/debug-bun-darwin-aarch64"
+export PATH="$BUN_DEBUG_INSTAL:$PATH"
+
+# to avoid non-zero exit code
+true
+
+# bun completions
+[ -s "/Users/weyertdeboer/.bun/_bun" ] && source "/Users/weyertdeboer/.bun/_bun"
+export PATH="/opt/homebrew/opt/dotnet@6/bin:$PATH"

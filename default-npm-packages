@@ -1,4 +1,8 @@
+turbo
 serve
 diff-so-fancy
 fkill-cli
 npm-quick-run
+npm-run-all
+rimraf
+@arethetypeswrong/cli

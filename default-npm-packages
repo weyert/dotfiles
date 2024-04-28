@@ -1,8 +1,9 @@
-turbo
+turbo@canary
 serve
 diff-so-fancy
 fkill-cli
 npm-quick-run
+npm-run-all2
 npm-run-all
 rimraf
 @arethetypeswrong/cli

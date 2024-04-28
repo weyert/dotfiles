@@ -50,16 +50,23 @@ _direnv_hook() {
 # enable mcfly (if installed)
 which mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
-asdf_dir="$(brew --prefix asdf)/libexec"
-if [[ -d $asdf_dir ]]; then
-	source $asdf_dir/asdf.sh
-	if [[ -f $asdf_dir/completions/asdf.bash ]]; then
-		source $asdf_dir/completions/asdf.bash
-	fi
+# enable mise (if installed)
+which mise &>/dev/null && eval "$(mise activate zsh)"
 
-	# Set the path of `node-build` to ASDF's node-build
-	export NODE_BUILD_DEFINITIONS="$HOME/.asdf/plugins/nodejs/.node-build/share/node-build"
-fi
+# asdf_dir="$(brew --prefix asdf)/libexec"
+# if [[ -d $asdf_dir ]]; then
+# 	source $asdf_dir/asdf.sh
+# 	if [[ -f $asdf_dir/completions/asdf.bash ]]; then
+# 		source $asdf_dir/completions/asdf.bash
+# 	fi
+
+# 	# Set the path of `node-build` to ASDF's node-build
+# 	export NODE_BUILD_DEFINITIONS="$HOME/.asdf/plugins/nodejs/.node-build/share/node-build"
+
+# 	# Enable the dotnet plugin
+# 	# shellcheck disable=SC1090
+# 	. ~/.asdf/plugins/dotnet/set-dotnet-env.zsh
+# fi
 
 # More colours with grc
 # shellcheck disable=SC1090
@@ -116,9 +123,9 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 export BUN_DEBUG_INSTAL="$HOME/Development/Projects/Opensource/bun/packages/debug-bun-darwin-aarch64"
 export PATH="$BUN_DEBUG_INSTAL:$PATH"
 
-# to avoid non-zero exit code
-true
-
 # bun completions
 [ -s "/Users/weyertdeboer/.bun/_bun" ] && source "/Users/weyertdeboer/.bun/_bun"
 export PATH="/opt/homebrew/opt/dotnet@6/bin:$PATH"
+
+# to avoid non-zero exit code
+true

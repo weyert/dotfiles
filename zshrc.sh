@@ -51,7 +51,9 @@ _direnv_hook() {
 which mcfly &>/dev/null && eval "$(mcfly init zsh)"
 
 # enable mise (if installed)
-which mise &>/dev/null && eval "$(mise activate zsh)"
+# which mise &>/dev/null && eval "$(mise activate zsh)"
+eval "$(mise activate zsh)"
+eval "$(mise hook-env -s zsh)"
 
 # asdf_dir="$(brew --prefix asdf)/libexec"
 # if [[ -d $asdf_dir ]]; then

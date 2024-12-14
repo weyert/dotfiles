@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run by Strap after installing Brewfile dependencies
 
-cd $(dirname $0)/..
+cd "$(dirname "$0")/.." || exit
 
 # Close terminal windows on successful exit code
 /usr/libexec/PlistBuddy ~/Library/Preferences/com.apple.Terminal.plist -c \
@@ -21,6 +21,12 @@ fi
 # Enable TouchID sudo
 bin/touchid-enable-pam-sudo
 
+# Add Github credentials if missing
+if command -v "gh" >/dev/null && ! gh auth token &>/dev/null; then
+  gh auth login --git-protocol https --hostname github.com --web
+fi
+
+
 # Prepare shell environment
 scripts/install-asdf-plugins
 script/install-node
@@ -31,4 +37,6 @@ script/set-macos-preferences
 
 
 # Ensure auto-update is always enabled
-sudo defaults write /Library/Preferences/com.apple.commerce.plist AutoUpdate 1
+if [ "$(defaults read /Library/Preferences/com.apple.commerce.plist AutoUpdate)" != "1" ]; then
+  sudo defaults write /Library/Preferences/com.apple.commerce.plist AutoUpdate 1
+fi

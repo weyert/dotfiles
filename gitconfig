@@ -2,7 +2,7 @@
 # Name used in commit messages.
 	name = Weyert de Boer
 # Email used in commit messages.
-	email = weyert@innerfuse.biz
+	email = 7049+weyert@users.noreply.github.com
 [github]
 # GitHub username for command-line tools.
 user = weyert

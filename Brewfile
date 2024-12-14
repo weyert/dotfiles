@@ -3,12 +3,12 @@ tap "homebrew/autoupdate"
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
 tap "homebrew/command-not-found"
 tap "homebrew/core"
 tap "homebrew/formula-analytics"
 tap "homebrew/services"
 tap "homebrew/test-bot"
+tap "bevanjkay/tap"
 tap "oven-sh/bun"
 
 # SVN  is not bundled with Montery anymore (and needed for some Brew)
@@ -57,6 +57,8 @@ brew "mkcert"
 
 # Platform built on V8 to build network applications
 brew "node@20"
+# Platform built on V8 to build network applications
+brew "node@22"
 brew "deno"
 brew "bun"
 
@@ -69,6 +71,8 @@ brew "protobuf"
 brew "ruby-build"
 # Ruby version manager
 brew "rbenv"
+# Tooling version manage
+brew "mise"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Open source programming language to build simple/reliable/efficient software
@@ -107,12 +111,12 @@ brew "mas"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
 
+# Find security issues in GitHub Actions setups
+brew "zizmor"
 
 brew "packer"
 brew "terraform"
 brew "kustomize"
-brew "podman"
-cask "podman-desktop"
 
 cask "font-fira-code-nerd-font"
 cask "font-ibm-plex"
@@ -125,6 +129,8 @@ cask "font-inter"
 cask "font-sf-mono"
 # Sans-serif signage typeface with a gentle character
 cask "font-signika"
+cask "font-skranji"
+cask "font-space-mono"
 
 cask "alfred"
 cask "1password"
@@ -136,6 +142,12 @@ cask "transmission"
 cask "iterm2"
 cask "warp"
 cask "contexts"
+
+# Docker
+casl "orbstack"
+
+# Video
+cask "davinci-resolve"
 
 # Hobbies
 cask "calibre"
@@ -150,8 +162,6 @@ cask "visual-studio-code"
 cask "visual-studio-code-insiders"
 cask "docker"
 cask "google-cloud-sdk"
-# Virtual machines UI using QEMU
-cask "utm"
 
 # Browsers
 cask "firefox"
@@ -160,12 +170,11 @@ cask "google-chrome"
 cask "google-chrome-canary"
 cask "microsoft-edge"
 cask "microsoft-edge-beta"
-#cask "safari-technology-preview"
+cast "safari-technology-preview"
 cask "brave-browser"
 
 # Design Tools
 cask "figma"
-#cask "sf-symbols"
 cask "affinity-photo"
 cask "affinity-designer"
 cask "affinity-publisher"
@@ -174,8 +183,9 @@ cask "affinity-publisher"
 mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Xcode", id: 497799835
+mas "Xcode", id: 497799835 unless File.exist?("/Applications/Xcode-beta.app")
 mas "Slack", id: 803453959
+mas "Excel", id: 462058435
 
 # Media
 mas "Receiver Radio", id: 1445434819
@@ -191,6 +201,9 @@ mas "Dynamo", id: 1445910651
 mas "StopTheMadness", id: 1376402589
 mas "1Blocker", id: 1365531024
 mas "1Password for Safari", id: 1569813296
+
+#
+
 
 # Attempt to install vscode extensions
 vscode "anykeyh.simplecov-vscode"

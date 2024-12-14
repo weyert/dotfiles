@@ -19,9 +19,8 @@ setopt share_history
 # Don't hang up background jobs
 setopt no_hup
 
-# autocorrect command and parameter spelling
+# autocorrect command spelling
 setopt correct
-setopt correctall
 
 # use emacs bindings even with vim as EDITOR
 bindkey -e
@@ -39,36 +38,6 @@ bindkey "^v" history-beginning-search-forward
 # enable autosuggestions
 ZSH_AUTOSUGGESTIONS="$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 [ -f "$ZSH_AUTOSUGGESTIONS" ] && source "$ZSH_AUTOSUGGESTIONS"
-
-# enable direnv (if installed)
-export DIRENV_LOG_FORMAT="$(printf "\033[2mdirenv: %%s\033[0m")"
-which direnv &>/dev/null && eval "$(direnv hook zsh)"
-_direnv_hook() {
-	eval "$(direnv export zsh 2> >(egrep -v -e '^....direnv: export' >&2))"
-}
-
-# enable mcfly (if installed)
-which mcfly &>/dev/null && eval "$(mcfly init zsh)"
-
-# enable mise (if installed)
-# which mise &>/dev/null && eval "$(mise activate zsh)"
-eval "$(mise activate zsh)"
-eval "$(mise hook-env -s zsh)"
-
-# asdf_dir="$(brew --prefix asdf)/libexec"
-# if [[ -d $asdf_dir ]]; then
-# 	source $asdf_dir/asdf.sh
-# 	if [[ -f $asdf_dir/completions/asdf.bash ]]; then
-# 		source $asdf_dir/completions/asdf.bash
-# 	fi
-
-# 	# Set the path of `node-build` to ASDF's node-build
-# 	export NODE_BUILD_DEFINITIONS="$HOME/.asdf/plugins/nodejs/.node-build/share/node-build"
-
-# 	# Enable the dotnet plugin
-# 	# shellcheck disable=SC1090
-# 	. ~/.asdf/plugins/dotnet/set-dotnet-env.zsh
-# fi
 
 # More colours with grc
 # shellcheck disable=SC1090

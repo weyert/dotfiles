@@ -19,6 +19,8 @@ field() {
 }
 
 # Setup paths
+
+# Remove from anywhere in PATH
 remove_from_path() {
   [ -d "$1" ] || return
   PATHSUB=":$PATH:"
@@ -28,18 +30,21 @@ remove_from_path() {
   export PATH="$PATHSUB"
 }
 
+# Add to the start of PATH if it exists
 add_to_path_start() {
   [ -d "$1" ] || return
   remove_from_path "$1"
   export PATH="$1:$PATH"
 }
 
+# Add to the end of PATH if it exists
 add_to_path_end() {
   [ -d "$1" ] || return
   remove_from_path "$1"
   export PATH="$PATH:$1"
 }
 
+# Add to PATH even if it doesn't exist
 force_add_to_path_start() {
   remove_from_path "$1"
   export PATH="$1:$PATH"
@@ -51,7 +56,6 @@ quiet_which() {
 
 if [[ -n "${MACOS}" ]]; then
   add_to_path_start "/opt/homebrew/bin"
-  add_to_path_start "/opt/workbrew/bin"
 elif [[ -n "${LINUX}" ]]; then
   add_to_path_start "/home/linuxbrew/.linuxbrew/bin"
 fi
@@ -87,20 +91,43 @@ if quiet_which brew; then
   export HOMEBREW_BUNDLE_INSTALL_CLEANUP=1
   export HOMEBREW_BUNDLE_DUMP_DESCRIBE=1
   export HOMEBREW_NO_ENV_HINTS=1
-  export HOMEBREW_AUTOREMOVE=1
   export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=1
   export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
-  export HOMEBREW_SORBET_RUNTIME=1
+  export HOMEBREW_NO_VERIFY_ATTESTATIONS=1
 
   add_to_path_end "${HOMEBREW_PREFIX}/Library/Homebrew/shims/gems"
 
   # Specifically want this to expand when defined, not when run.
   # shellcheck disable=SC2139
   alias homebrew="${HOMEBREW_PREFIX}/bin/brew"
-  alias workbrew='/opt/workbrew/bin/brew'
-  alias workbrewdo='sudo --set-home --preserve-env --user=workbrew --'
+  alias portableruby="${HOMEBREW_PREFIX}/Library/Homebrew/vendor/portable-ruby/current/bin/ruby"
+  alias portablebundle="${HOMEBREW_PREFIX}/Library/Homebrew/vendor/portable-ruby/current/bin/bundle"
 
   alias hbc='cd $HOMEBREW_REPOSITORY/Library/Taps/homebrew/homebrew-core'
+fi
+
+
+
+# enable direnv (if installed)
+if quiet_which direnv; then
+   export DIRENV_WARN_TIMEOUT=1m
+   export DIRENV_LOG_FORMAT="$(printf "\033[2mdirenv: %%s\033[0m")"
+   eval "$(direnv hook zsh)"
+   _direnv_hook() {
+     eval "$(direnv export zsh 2> >(egrep -v -e '^....direnv: export' >&2))"
+   }
+fi
+
+# enable mcfly (if installed)
+if quiet_which mcfly; then
+   eval "$(mcfly init zsh)"
+fi
+
+# enable mise (if installed)
+# which mise &>/dev/null && eval "$(mise activate zsh)"
+if quiet_which direnv; then
+   eval "$(mise activate zsh)"
+   eval "$(mise hook-env -s zsh)"
 fi
 
 if quiet_which delta; then
@@ -118,14 +145,22 @@ else
   alias ls="ls -F --color=auto"
 fi
 
-# if quiet_which bat; then
-#   export BAT_THEME="ansi"
-#   alias cat="bat"
-#   export HOMEBREW_BAT=1
-# fi
+if quiet_which bat; then
+  export BAT_THEME="ansi"
+  alias cat="bat"
+  export HOMEBREW_BAT=1
+fi
 
 if quiet_which prettyping; then
   alias ping="prettyping --nolegend"
+fi
+
+if quiet_which dust; then
+  alias du="dust"
+fi
+
+if quiet_which duf; then
+  alias df="duf"
 fi
 
 if quiet_which htop; then
@@ -134,29 +169,15 @@ fi
 
 # Configure environment
 export CLICOLOR=1
-export GITHUB_PROFILE_BOOTSTRAP=1
-export GITHUB_PACKAGES_SUBPROJECT_CACHE_READ=1
-export GITHUB_NO_AUTO_BOOTSTRAP=1
 
 # OS-specific configuration
 if [[ -n "${MACOS}" ]]; then
   export GREP_OPTIONS="--color=auto"
   export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
-
-  add_to_path_end "${HOMEBREW_PREFIX}/opt/git/share/git-core/contrib/diff-highlight"
-  add_to_path_end "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+  export HOMEBREW_ENFORCE_SBOM=1
 
   alias locate="mdfind -name"
   alias finder-hide="setfile -a V"
-
-  # Load GITHUB_TOKEN from macOS keychain
-  # export GITHUB_TOKEN=$(
-  #   printf "protocol=https\\nhost=github.com\\n" |
-  #     git credential fill |
-  #     perl -lne '/password=(gho_.+)/ && print "$1"'
-  # )
-  # export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
-  # export JEKYLL_GITHUB_TOKEN="${GITHUB_TOKEN}"
 
   # output what's listening on the supplied port
   on-port() {
@@ -187,6 +208,8 @@ elif [[ -n "${LINUX}" ]]; then
   # Run dircolors if it exists
   quiet_which dircolors && eval "$(dircolors -b)"
 
+  add_to_path_end "/data/github/shell/bin"
+
   alias su="/bin/su -"
   alias open="xdg-open"
 elif [[ -n "${WINDOWS}" ]]; then
@@ -213,32 +236,33 @@ if quiet_which nodenv; then
   add_to_path_start "${shims}"
 fi
 
+# Load GITHUB_TOKEN from gh
+if quiet_which gh; then
+  export GITHUB_TOKEN="$(gh auth token)"
+  export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
+  export JEKYLL_GITHUB_TOKEN="${GITHUB_TOKEN}"
+fi
+
 # Set up editor
-if quiet_which code; then
+if quiet_which cursor; then
+  export EDITOR="cursor"
+  alias code="cursor"
+elif quiet_which code; then
   export EDITOR="code"
+else
+  export EDITOR="vim"
+fi
+
+if quiet_which code; then
   export GIT_EDITOR="${EDITOR} -w"
   export SVN_EDITOR="${GIT_EDITOR}"
 
-  code() {
-    local arg
-
-    # mkdir/touch any files that don't exist because the `open` hack doesn't work for them.
-    for arg; do
-      [[ -e "${arg}" ]] && break
-
-      command mkdir -p "$(dirname "${arg}")"
-      touch "${arg}"
-    done
-
-    open -b "com.microsoft.VSCode" "$@"
-  }
-
   # Edit Rails credentials in VSCode
   rails-credentials-edit-production() {
-    EDITOR="code -w" bundle exec rails credentials:edit --environment production
+    EDITOR="${EDITOR} -w" bundle exec rails credentials:edit --environment production
   }
   rails-credentials-edit-development() {
-    EDITOR="code -w" bundle exec rails credentials:edit --environment development
+    EDITOR="${EDITOR} -w" bundle exec rails credentials:edit --environment development
   }
 else
   export EDITOR="vim"
@@ -282,11 +306,6 @@ trash() {
 # GitHub API shortcut
 github-api-curl() {
   curl -H "Authorization: token ${GITHUB_TOKEN}" "https://api.github.com/$1" | jq .
-}
-
-# Spit out Okta keychain password
-okta-keychain() {
-  security find-generic-password -l device_trust '-w'
 }
 
 # Clear entire screen buffer

@@ -60,7 +60,9 @@ brew "bun"
 
 brew "kubernetes-cli"
 brew "ansible"
+bew "opentofu"
 cask "orbstack"
+brew "gh"
 
 # Work applications
 cask "microsoft-teams"

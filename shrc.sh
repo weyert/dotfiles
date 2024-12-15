@@ -174,7 +174,7 @@ export CLICOLOR=1
 if [[ -n "${MACOS}" ]]; then
   export GREP_OPTIONS="--color=auto"
   export VAGRANT_DEFAULT_PROVIDER="vmware_fusion"
-  export HOMEBREW_ENFORCE_SBOM=1
+  export HOMEBREW_ENFORCE_SBOM=0
 
   alias locate="mdfind -name"
   alias finder-hide="setfile -a V"
@@ -201,7 +201,9 @@ if [[ -n "${MACOS}" ]]; then
   }
 
   # Only run this if it's not already running
-  pgrep -fq touchid-enable-pam-sudo || touchid-enable-pam-sudo --quiet
+  if quiet_which touchid-enable-pam-sudo; then
+      pgrep -fq touchid-enable-pam-sudo || touchid-enable-pam-sudo --quiet
+  fi
 elif [[ -n "${LINUX}" ]]; then
   quiet_which keychain && eval "$(keychain -q --eval --agents ssh id_rsa)"
 

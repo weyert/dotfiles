@@ -2,9 +2,7 @@ tap "homebrew/aliases"
 tap "homebrew/autoupdate"
 tap "homebrew/bundle"
 tap "homebrew/cask"
-tap "homebrew/cask-fonts"
 tap "homebrew/command-not-found"
-tap "homebrew/core"
 tap "homebrew/formula-analytics"
 tap "homebrew/services"
 tap "homebrew/test-bot"
@@ -27,8 +25,6 @@ brew "bat"
 brew "eza"
 # direnv is an extension for your shell.
 brew "direnv"
-# asdf is a CLI tool that can manage multiple language runtime versions
-brew "asdf"
 # A tool for exploring a docker image, layer contents
 brew "dive"
 # Cross-platform make
@@ -64,14 +60,19 @@ brew "bun"
 
 brew "kubernetes-cli"
 brew "ansible"
+cask "orbstack"
 
-brew "launchdns", restart_service: true
+# Work applications
+cask "microsoft-teams"
+cask "vmware-horizon-client"
+cask "vmware-fusion"
+
 brew "protobuf"
 # Install various Ruby versions and implementations
 brew "ruby-build"
 # Ruby version manager
 brew "rbenv"
-# Tooling version manage
+# mise is a CLI tool that can manage multiple language runtime versions
 brew "mise"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
@@ -113,14 +114,13 @@ brew "zsh-autosuggestions"
 
 # Find security issues in GitHub Actions setups
 brew "zizmor"
+# Tool to test and run Github Actions workflows locally through docker
+brew "act"
 
-brew "packer"
-brew "terraform"
 brew "kustomize"
 
 cask "font-fira-code-nerd-font"
 cask "font-ibm-plex"
-cask "font-ibm-plex-mono"
 cask "font-blex-mono-nerd-font"
 cask "font-abel"
 cask "font-fjalla-one"
@@ -143,9 +143,6 @@ cask "iterm2"
 cask "warp"
 cask "contexts"
 
-# Docker
-casl "orbstack"
-
 # Video
 cask "davinci-resolve"
 
@@ -159,17 +156,29 @@ cask "setapp"
 cask "android-studio"
 # Open-source code editor
 cask "visual-studio-code"
-cask "visual-studio-code-insiders"
-cask "docker"
+cask "visual-studio-code@insiders"
 cask "google-cloud-sdk"
+
+# Improve quality of my 4K display
+cask "betterdisplay"
+cask "screenmemory"
+# Used by open-source communities
+cask "slack"
+
+# Applications subscribed via Setapp
+#cask "proxyman"
+#cask "cleanshot"
+#cask "bartender"
+#cask "boltai"
+#cask "swish"
 
 # Browsers
 cask "firefox"
-cask "firefox-developer-edition"
+cask "firefox@developer-edition"
 cask "google-chrome"
-cask "google-chrome-canary"
+cask "google-chrome@canary"
 cask "microsoft-edge"
-cask "microsoft-edge-beta"
+cask "microsoft-edge@beta"
 cast "safari-technology-preview"
 cask "brave-browser"
 

@@ -181,7 +181,7 @@ cask "google-chrome"
 cask "google-chrome@canary"
 cask "microsoft-edge"
 cask "microsoft-edge@beta"
-cast "safari-technology-preview"
+cask "safari-technology-preview"
 cask "brave-browser"
 
 # Design Tools

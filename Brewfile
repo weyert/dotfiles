@@ -1,7 +1,6 @@
 tap "homebrew/aliases"
 tap "homebrew/autoupdate"
 tap "homebrew/bundle"
-tap "homebrew/cask"
 tap "homebrew/command-not-found"
 tap "homebrew/formula-analytics"
 tap "homebrew/services"
@@ -63,10 +62,9 @@ brew "ansible"
 brew "opentofu"
 cask "orbstack"
 brew "gh"
+cask "beyond-compare"
 
 # Work applications
-cask "microsoft-teams"
-cask "vmware-horizon-client"
 cask "vmware-fusion"
 
 brew "protobuf"

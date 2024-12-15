@@ -513,7 +513,7 @@ run_brew_installs() {
 	else
 		[ -z "$STRAP_DOTFILES_BRANCH" ] && STRAP_DOTFILES_BRANCH=HEAD
 		git_branch="${STRAP_DOTFILES_BRANCH##*/}"
-		github_user="${STRAP_GITHUB_USER:-br3ndonland}"
+		github_user="${STRAP_GITHUB_USER:-weyert}"
 		brewfile_domain="https://raw.githubusercontent.com"
 		brewfile_path="$github_user/dotfiles/$git_branch/Brewfile"
 		brewfile_url="$brewfile_domain/$brewfile_path"
@@ -521,6 +521,18 @@ run_brew_installs() {
 		curl -fsSL "$brewfile_url" | brew bundle --file=-
 		logk
 	fi
+
+	# If work Brewfile exists we should install its brews and casks
+	if [ -f "$HOME/.Brewfile.work" ]; then
+		log "Installing from local work Brewfile with Brew Bundle."
+		brew bundle check --file=$HOME/.Brewfile.work || brew bundle --file=$HOME/.Brewfile.work
+		logk
+	elif [ -f "Brewfile" ]; then
+		log "Installing from local work Brewfile with Brew Bundle."
+		brew bundle check --file=Brewfile.work || brew bundle --file=Brewfile.work
+		logk
+	fi
+
 	# Tap a custom Homebrew tap
 	if [ -n "$CUSTOM_HOMEBREW_TAP" ]; then
 		read -ra CUSTOM_HOMEBREW_TAP <<<"$CUSTOM_HOMEBREW_TAP"

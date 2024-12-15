@@ -60,7 +60,7 @@ brew "bun"
 
 brew "kubernetes-cli"
 brew "ansible"
-bew "opentofu"
+brew "opentofu"
 cask "orbstack"
 brew "gh"
 

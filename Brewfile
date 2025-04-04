@@ -130,7 +130,7 @@ cask "font-sf-mono"
 # Sans-serif signage typeface with a gentle character
 cask "font-signika"
 cask "font-skranji"
-cask "font-space-mono"
+#cask "font-space-mono"
 
 cask "alfred"
 cask "1password"

@@ -67,6 +67,9 @@ add_to_path_end "${HOME}/.dotfiles/bin"
 export GOPATH="${HOME}/.gopath"
 add_to_path_end "${GOPATH}/bin"
 
+# Registering the psql client cli tool
+add_to_path_end "/opt/homebrew/opt/libpq/bin"
+
 # Aliases
 alias mkdir="mkdir -vp"
 alias df="df -H"
@@ -240,7 +243,7 @@ fi
 
 # Load GITHUB_TOKEN from gh
 if quiet_which gh; then
-  export GITHUB_TOKEN="$(gh auth token)"
+  # export GITHUB_TOKEN="$(gh auth token)"
   export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
   export JEKYLL_GITHUB_TOKEN="${GITHUB_TOKEN}"
 fi

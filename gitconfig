@@ -238,6 +238,13 @@ insteadOf = "gist:"
 [credential]
 # Use macOS Keychain to store HTTP passwords.
 helper = osxkeychain
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+
 [hub]
 # Use HTTPS rather than SSH protocol in Hub
 protocol = https

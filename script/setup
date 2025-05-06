@@ -1,35 +1,37 @@
-#!/bin/sh
+#!/bin/bash
 # Install all dotfiles into the home directory
 
-if [ -L "$0" ]; then
+if [[ -L "$0" ]]; then
   SCRIPTSETUP="$(readlink "$0")"
 else
   SCRIPTSETUP="$0"
 fi
 
-DOTFILESDIRREL=$(dirname $SCRIPTSETUP)
-cd $DOTFILESDIRREL/..
+DOTFILESDIRREL=$(dirname "${SCRIPTSETUP}")
+cd "${DOTFILESDIRREL}"/.. || exit
 DOTFILESDIR=$(pwd -P)
 
-[ $(uname -s) = "Darwin" ] && export MACOS=1 && export UNIX=1
-[ $(uname -s) = "Linux" ] && export LINUX=1 && export UNIX=1
+[[ "$(uname -s)" = "Darwin" ]] && export MACOS=1 && export UNIX=1
+[[ "$(uname -s)" = "Linux" ]] && export LINUX=1 && export UNIX=1
 uname -s | grep -q "_NT-" && export WINDOWS=1
+[[ -n "$LINUX" ]] && grep -qEi "(Microsoft|WSL)" /proc/version && export WSL=1
 
-if [ $MACOS ]; then
-  VSCODE="$HOME/Library/Application Support/Code/User"
-  VSCODE_INSIDERS="$HOME/Library/Application Support/Code - Insiders/User"
-elif [ $LINUX ]; then
-  VSCODE="$HOME/.config/Code/User"
-  VSCODE_INSIDERS="$HOME/.config/Code - Insiders/User"
-elif [ $WINDOWS ]; then
-  VSCODE="$APPDATA/Code/User"
-  VSCODE_INSIDERS="$APPDATA/Code - Insiders/User"
+if [[ -n "${MACOS}" ]]; then
+  VSCODE="${HOME}/Library/Application Support/Code/User"
+  CURSOR="${HOME}/Library/Application Support/Cursor/User"
+elif [[ -n "${LINUX}" ]]; then
+  VSCODE="${HOME}/.config/Code/User"
+  CURSOR="${HOME}/.config/Cursor/User"
+elif [[ -n "${WINDOWS}" ]]; then
+  VSCODE="${APPDATA}/Code/User"
+  CURSOR="${APPDATA}/Cursor/User"
 fi
+ZED="${HOME}/.config/zed/settings.json"
 
 for DOTFILE in *; do
-  HOMEFILE="$HOME/.$DOTFILE"
-  [ -d $DOTFILE ] && DOTFILE="$DOTFILE/"
-  DIRFILE="$DOTFILESDIR/$DOTFILE"
+  HOMEFILE="${HOME}/.${DOTFILE}"
+  [[ -d "${DOTFILE}" ]] && DOTFILE="${DOTFILE}/"
+  DIRFILE="${DOTFILESDIR}/${DOTFILE}"
 
   # Don't mess with Codespaces' default GPG/SSH setup.
   if [ -n "$CODESPACES" ]; then
@@ -67,7 +69,7 @@ for DOTFILE in *; do
       ln -sv "$DIRFILE" "$HOMEFILE"
     fi
   else
-    cp -rv "$DIRFILE" "$HOMEFILE"
+    cp -rv "${DIRFILE}" "${HOMEFILE}"
   fi
 done
 
@@ -75,6 +77,9 @@ HOMEDOTFILES="$HOME/.dotfiles"
 if [ "$DOTFILESDIR" != "$HOMEDOTFILES" ]; then
   ln -sf "$DOTFILESDIR" "$HOMEDOTFILES"
 fi
+
+# Setup my home directory how I like it
+mkdir -pv ~/Development/Projects/Opensource ~/Development/Projects/Personal ~/Development/Projects/Work
 
 if [ -n "$CODESPACES" ]; then
   # Fix up Codespaces permissions
@@ -84,4 +89,8 @@ if [ -n "$CODESPACES" ]; then
   if [ "$CODESPACE_VSCODE_FOLDER" = "/workspaces/github" ]; then
     git -C /workspaces/github config gc.auto 0
   fi
+fi
+
+if [[ -n "${LINUX}" ]]; then
+  exec script/linux-after-setup
 fi

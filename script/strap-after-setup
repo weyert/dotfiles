@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Run by Strap after installing Brewfile dependencies
 
 cd "$(dirname "$0")/.." || exit
@@ -10,16 +10,12 @@ cd "$(dirname "$0")/.." || exit
 # Setup my home directory how I like it
 mkdir -pv ~/Development/Projects
 mkdir -pv ~/Development/Projects/Personal ~/Development/Projects/Tapico ~/Development/Projects/Work ~/Development/Projects/Opensource
-ln -vsf "$(brew --repository)" ~/Development/Projects/Opensource/Homebrew
 ln -vsf "$(pwd -P)" ~/Development/Projects/Opensource/dotfiles
 
 # Use ZSH as my default Shell
 if [ "$SHELL" != "/bin/zsh" ]; then
   chsh -s /bin/zsh weyertdeboer
 fi
-
-# Enable TouchID sudo
-bin/touchid-enable-pam-sudo
 
 # Add Github credentials if missing
 if command -v "gh" >/dev/null && ! gh auth token &>/dev/null; then
@@ -28,7 +24,6 @@ fi
 
 
 # Prepare shell environment
-scripts/install-asdf-plugins
 script/install-node
 script/extract-onepassword-secrets
 script/install-vscode-extensions
@@ -39,4 +34,12 @@ script/set-macos-preferences
 # Ensure auto-update is always enabled
 if [ "$(defaults read /Library/Preferences/com.apple.commerce.plist AutoUpdate)" != "1" ]; then
   sudo defaults write /Library/Preferences/com.apple.commerce.plist AutoUpdate 1
+fi
+
+# Enable Touch ID for sudo
+bin/touchid-enable-pam-sudo --quiet
+
+# Add GitHub credentials if missing
+if command -v "gh" >/dev/null && ! gh auth token &>/dev/null; then
+  gh auth login --git-protocol https --hostname github.com --web
 fi

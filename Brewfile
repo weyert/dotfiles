@@ -3,6 +3,7 @@ tap "homebrew/autoupdate"
 tap "homebrew/bundle"
 tap "homebrew/command-not-found"
 tap "homebrew/formula-analytics"
+tap "homebrew/portable-ruby"
 tap "homebrew/services"
 tap "homebrew/test-bot"
 tap "bevanjkay/tap"
@@ -13,17 +14,25 @@ brew "svn"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
-brew "git-delta"
+brew
+# GNU version of the tar archiving utility
+brew "gnu-tar"
 # Git filter repo scripts for Git
 brew "git-filter-repo"
 # Search tool like grep, but optimized for programmers
 brew "ack"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Static checker for GitHub Actions workflow files
+brew "actionlint"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Modern, maintained replacement for ls
 brew "eza"
 # direnv is an extension for your shell.
 brew "direnv"
+# Disk Usage/Free Utility - a better 'df' alternative
+brew "duf"
 # A tool for exploring a docker image, layer contents
 brew "dive"
 # Cross-platform make
@@ -36,8 +45,11 @@ brew "diffoscope"
 brew "fd"
 # Validating, recursive, caching DNS resolver
 brew "unbound"
+# Manage Procfile-based applications
+brew "foreman"
 
 brew "fork-cleaner"
+
 brew "openssl"
 # GNU Pretty Good Privacy (PGP) package
 brew "gnupg"
@@ -45,15 +57,24 @@ brew "gnupg"
 brew "grc"
 # Improved top (interactive process viewer)
 brew "htop"
+# YAML Parser
+brew "libyaml"
 # Command-line benchmarking tool
 brew "hyperfine"
+# CLI for Node.js style checker and lint tool for Markdown files
+brew "markdownlint-cli"
+# Mac App Store command-line interface
+brew "mas"
+# Install NodeJS versions
+brew "node-build"
+# Optimizer for PNG files
+brew "pngcrush"
+# Wrapper to colorize and simplify ping's output
+brew "prettyping"
+
 brew "ncdu"
 brew "mkcert"
 
-# Platform built on V8 to build network applications
-brew "node@20"
-# Platform built on V8 to build network applications
-brew "node@22"
 brew "deno"
 brew "bun"
 
@@ -61,6 +82,7 @@ brew "kubernetes-cli"
 brew "ansible"
 brew "opentofu"
 cask "orbstack"
+# GitHub command-line tool
 brew "gh"
 cask "beyond-compare"
 
@@ -82,10 +104,14 @@ brew "go"
 brew "ruby"
 # Powerful, clean, object-oriented scripting language
 brew "ruby@3.1"
+# Syntax-aware linter for prose
+brew "vale"
 # Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
 # Autoformat shell script source code
 brew "shfmt"
+# Linter for YAML files
+brew "yamllint"
 # Watch files and take action when they change
 brew "watchman"
 
@@ -125,6 +151,11 @@ cask "font-blex-mono-nerd-font"
 cask "font-abel"
 cask "font-fjalla-one"
 cask "font-inter"
+cask "font-sf-mono"
+cask "font-signika"
+cask "font-skranji"
+cask "font-space-mono"
+
 # Monospaced variant of "San Francisco" by Apple
 cask "font-sf-mono"
 # Sans-serif signage typeface with a gentle character
@@ -133,7 +164,9 @@ cask "font-skranji"
 #cask "font-space-mono"
 
 cask "alfred"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
 cask "1password-cli"
 
 cask "transmission"
@@ -145,6 +178,8 @@ cask "contexts"
 
 # Video
 cask "davinci-resolve"
+# Hard disk backup and cloning utility
+cask "carbon-copy-cloner"
 
 # Hobbies
 cask "calibre"
@@ -181,7 +216,10 @@ cask "microsoft-edge"
 cask "microsoft-edge@beta"
 cask "safari-technology-preview"
 cask "brave-browser"
-
+# Audiobook manager for Audible users
+cask "openaudible"
+# Virtual machines UI using QEMU
+cask "utm"
 # Design Tools
 cask "figma"
 cask "affinity-photo"
@@ -217,10 +255,13 @@ mas "1Password for Safari", id: 1569813296
 # Attempt to install vscode extensions
 vscode "anykeyh.simplecov-vscode"
 vscode "ban.spellright"
+vscode "anykeyh.simplecov-vscode"
+vscode "davidanson.vscode-markdownlint"
+
 vscode "bradlc.vscode-tailwindcss"
 vscode "DavidAnson.vscode-markdownlint"
 vscode "eamodio.gitlens"
-vscode "EditorConfig.EditorConfig"
+vscode "editorconfig.editorconfig"
 vscode "foxundermoon.shell-format"
 vscode "GitHub.codespaces"
 vscode "GitHub.copilot"
@@ -228,6 +269,14 @@ vscode "github.vscode-github-actions"
 vscode "golang.go"
 vscode "rust-lang.rust-analyzer"
 vscode "heybourn.headwind"
+vscode "github.codespaces"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.vscode-github-actions"
+vscode "github.vscode-pull-request-github"
+vscode "golang.go"
+vscode "markis.code-coverage"
+
 vscode "markis.code-coverage"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-vscode-remote.remote-containers"
@@ -235,6 +284,7 @@ vscode "ms-vscode-remote.remote-wsl"
 vscode "ms-vscode-remote.vscode-remote-extensionpack"
 vscode "redhat.vscode-commons"
 vscode "redhat.vscode-yaml"
+vscode "timonwong.shellcheck"
 vscode "stylelint.vscode-stylelint"
 vscode "timonwong.shellcheck"
 vscode "Wattenberger.footsteps"

@@ -1,0 +1,6 @@
+[commit]
+	# Sign commits with GPG
+	gpgsign = true
+[gpg]
+	# Do GPG signing with SSH keys
+	format = ssh

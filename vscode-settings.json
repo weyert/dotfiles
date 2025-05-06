@@ -1,5 +1,4 @@
 {
-  // Place your settings in this file to overwrite the default settings
   "editor.formatOnPaste": false,
   "editor.formatOnSave": true,
   "editor.formatOnSaveTimeout": 5000,
@@ -64,7 +63,6 @@
     "editor.suggest.showSnippets": true
   },
   "editor.tabSize": 2,
-  // "editor.renderWhitespace": "boundary",
   "editor.glyphMargin": false,
   "editor.folding": false,
   "files.exclude": {
@@ -178,7 +176,7 @@
   "vscode-edge-devtools.mirrorEdits": true,
   "security.workspace.trust.untrustedFiles": "open",
   "window.zoomLevel": 1,
-  "editor.inlineSuggest.enabled": true
+  "editor.inlineSuggest.enabled": true,
   "debug.allowBreakpointsEverywhere": true,
   "debug.showBreakpointsInOverviewRuler": true,
   "workbench.editor.enablePreview": false

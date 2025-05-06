@@ -1,3 +1,4 @@
+/ssh/1Password/
 /ssh/id_*
 /ssh/id_rsa
 /ssh/*_rsa*
@@ -7,7 +8,10 @@
 /gnupg/*.gpg
 /gnupg/*.kbx
 /gnupg/*.private.*
+/gnupg/*.lock
 /gnupg/.*
+/gnupg/gpg-agent.conf
+/gnupg/sshcontrol
 bundle/cache
 secrets
 rbenv/*/

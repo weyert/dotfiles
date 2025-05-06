@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # shellcheck disable=SC2155
 
 # Colourful manpages
@@ -32,22 +32,22 @@ remove_from_path() {
 
 # Add to the start of PATH if it exists
 add_to_path_start() {
-  [ -d "$1" ] || return
+  [[ -d "$1" ]] || return
   remove_from_path "$1"
-  export PATH="$1:$PATH"
+  export PATH="$1:${PATH}"
 }
 
 # Add to the end of PATH if it exists
 add_to_path_end() {
-  [ -d "$1" ] || return
+  [[ -d "$1" ]] || return
   remove_from_path "$1"
-  export PATH="$PATH:$1"
+  export PATH="${PATH}:$1"
 }
 
 # Add to PATH even if it doesn't exist
 force_add_to_path_start() {
   remove_from_path "$1"
-  export PATH="$1:$PATH"
+  export PATH="$1:${PATH}"
 }
 
 quiet_which() {
@@ -96,6 +96,7 @@ if quiet_which brew; then
   export HOMEBREW_NO_ENV_HINTS=1
   export HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS=1
   export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
+  export HOMEBREW_NO_VERIFY_ATTESTATIONS=1
   export HOMEBREW_NO_VERIFY_ATTESTATIONS=1
 
   add_to_path_end "${HOMEBREW_PREFIX}/Library/Homebrew/shims/gems"
@@ -214,6 +215,7 @@ elif [[ -n "${LINUX}" ]]; then
   quiet_which dircolors && eval "$(dircolors -b)"
 
   add_to_path_end "/data/github/shell/bin"
+  add_to_path_start "/workspaces/github/bin"
 
   alias su="/bin/su -"
   alias open="xdg-open"
@@ -243,7 +245,8 @@ fi
 
 # Load GITHUB_TOKEN from gh
 if quiet_which gh; then
-  # export GITHUB_TOKEN="$(gh auth token)"
+  export GITHUB_TOKEN="$(gh auth token)"
+  export GH_TOKEN="${GITHUB_TOKEN}"
   export HOMEBREW_GITHUB_API_TOKEN="${GITHUB_TOKEN}"
   export JEKYLL_GITHUB_TOKEN="${GITHUB_TOKEN}"
 fi
@@ -255,7 +258,7 @@ if quiet_which cursor; then
 elif quiet_which code; then
   export EDITOR="code"
 else
-  export EDITOR="vim"
+	export EDITOR="vim"
 fi
 
 if quiet_which code; then

@@ -63,7 +63,7 @@ pnpm-debug.log
 *.ignored.*
 
 # Ignore build directories.
-b/
+build/
 
 # Ignore some testing files.
 test/js/functional/*.html

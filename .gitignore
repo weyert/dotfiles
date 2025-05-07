@@ -18,3 +18,6 @@ rbenv/*/
 Brewfile.lock.json
 ssh/podman-machine-default
 ssh/podman-machine-default.pub
+/config/gcloud
+/config/iterm2
+/config/gh/hosts.yml

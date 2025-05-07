@@ -2,28 +2,11 @@ Include daytona_config
 
 Include ~/.orbstack/ssh/config
 
-Host 192.168.0.37
-	HostName 192.168.0.37
-	User weyertdeboer
-
-Host *.github.com *.github.net *.githubapp.com
-	ForwardAgent no
-	User weyert
-	UseKeychain yes
-	AddKeysToAgent yes
-	IdentityFile ~/.ssh/id_rsa
-	IdentityFile ~/.ssh/id_rsa_kikkernet
-
-Host github-codespaces
-	User root
-	HostName localhost
-	Port 2222
 
 Host *
 	StrictHostKeyChecking ask
 	VerifyHostKeyDNS ask
+	IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 	NoHostAuthenticationForLocalhost yes
-	UseKeychain yes
-	AddKeysToAgent yes
 	ControlMaster auto
 	ControlPath /tmp/ssh-%r@%h:%p.socket

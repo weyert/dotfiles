@@ -186,7 +186,9 @@ cask "openaudible"
 
 # Internet/Development Tools
 cask "setapp"
-cask "android-studio"
+cask "goland"
+cask "rider"
+
 # Open-source code editor
 cask "visual-studio-code"
 cask "visual-studio-code@insiders"

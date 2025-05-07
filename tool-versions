@@ -1,8 +1,8 @@
-direnv 2.35.0
+direnv 2.36.0
 nodejs 24
 bun    1.2.12
 python 3.11.8
-pnpm   10.7.0
+pnpm   10.10.0
 rust   1.86.0
 golang 1.24.3
 java   21

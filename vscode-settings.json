@@ -18,10 +18,8 @@
   "workbench.fontAliasing": "auto",
   "workbench.editor.closeOnFileDelete": false,
   "editor.detectIndentation": true,
-  "editor.renderIndentGuides": true,
   "editor.selectionHighlight": true,
   "editor.renderControlCharacters": false,
-  "editor.lightbulb.enabled": true,
   "editor.parameterHints.enabled": false,
   "editor.fontFamily": "'IBM Plex Mono', monospace",
   "editor.fontSize": 18,
@@ -45,7 +43,7 @@
   "editor.wordWrap": "bounded",
   "editor.wordWrapColumn": 118,
   "editor.snippetSuggestions": "top",
-  "editor.wordBasedSuggestions": false,
+  "editor.wordBasedSuggestions": "off",
   "editor.suggest.localityBonus": true,
   "editor.acceptSuggestionOnCommitCharacter": false,
   "editor.suggest.showKeywords": true,
@@ -142,7 +140,7 @@
   },
   "javascript.updateImportsOnFileMove.enabled": "never",
   "typescript.updateImportsOnFileMove.enabled": "never",
-  "editor.cursorSmoothCaretAnimation": true,
+  "editor.cursorSmoothCaretAnimation": "on",
   "editor.smoothScrolling": true,
   "php.suggest.basic": false,
   "typescript.suggest.autoImports": false,
@@ -162,7 +160,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": false
+    "source.fixAll.eslint": "never"
   },
   "debug.node.autoAttach": "on",
   "terminal.external.osxExec": "",
@@ -179,5 +177,19 @@
   "editor.inlineSuggest.enabled": true,
   "debug.allowBreakpointsEverywhere": true,
   "debug.showBreakpointsInOverviewRuler": true,
-  "workbench.editor.enablePreview": false
+  "workbench.editor.enablePreview": false,
+  "editor.guides.indentation": true,
+  "roo-cline.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show",
+    "make test",
+    "make install",
+    "make build",
+    "pnpm test",
+    "pnpm install"
+  ]
 }

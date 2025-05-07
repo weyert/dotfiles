@@ -14,7 +14,7 @@ brew "svn"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
-brew
+brew "git-delta"
 # GNU version of the tar archiving utility
 brew "gnu-tar"
 # Git filter repo scripts for Git
@@ -234,6 +234,8 @@ mas "Pages", id: 409201541
 mas "Xcode", id: 497799835 unless File.exist?("/Applications/Xcode-beta.app")
 mas "Slack", id: 803453959
 mas "Excel", id: 462058435
+mas "Access: Passwords Companion", id: 6469049274
+
 
 # Media
 mas "Receiver Radio", id: 1445434819
@@ -246,21 +248,19 @@ cask "SoundSource"
 mas "Dynamo", id: 1445910651
 
 # Content Blockers
-mas "StopTheMadness", id: 1376402589
+mas "StopTheMadness Pro", id: 6471380298
 mas "1Blocker", id: 1365531024
 mas "1Password for Safari", id: 1569813296
-
-#
+mas "Wipr 2", id: 1662217862
+mas "SponsorBlock for Safari", id: 1573461917
 
 
 # Attempt to install vscode extensions
 vscode "anykeyh.simplecov-vscode"
 vscode "ban.spellright"
-vscode "anykeyh.simplecov-vscode"
 vscode "davidanson.vscode-markdownlint"
 
 vscode "bradlc.vscode-tailwindcss"
-vscode "DavidAnson.vscode-markdownlint"
 vscode "eamodio.gitlens"
 vscode "editorconfig.editorconfig"
 vscode "foxundermoon.shell-format"

@@ -164,6 +164,7 @@ cask "font-skranji"
 #cask "font-space-mono"
 
 cask "alfred"
+cask "raycast"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password

@@ -260,7 +260,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Set the icon size of Dock items to 16 pixels
-defaults write com.apple.dock tilesize -int 16
+defaults write com.apple.dock tilesize -int 25
 
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
@@ -280,10 +280,10 @@ defaults write com.apple.dock show-process-indicators -bool true
 # Wipe all (default) app icons from the Dock
 # This is only really useful when setting up a new Mac, or if you don’t use
 # the Dock to launch apps.
-defaults write com.apple.dock persistent-apps -array
+# defaults write com.apple.dock persistent-apps -array
 
 # Show only open applications in the Dock
-defaults write com.apple.dock static-only -bool true
+# defaults write com.apple.dock static-only -bool true
 
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
@@ -310,7 +310,7 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 # defaults write com.apple.dock autohide-time-modifier -float 0
 
 # Automatically hide and show the Dock
-defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide -bool false
 
 # Don’t show recent applications in Dock
 #defaults write com.apple.dock show-recents -bool false
@@ -325,8 +325,12 @@ defaults write com.apple.dock showLaunchpadGestureEnabled -int 0
 #find "${HOME}/Library/Application Support/Dock" -name "*-*.db" -maxdepth 1 -delete
 
 # Add iOS & Watch Simulator to Launchpad
-sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
-sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
+if [ -e "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" ]; then
+	sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app" "/Applications/Simulator.app"
+	sudo ln -sf "/Applications/Xcode.app/Contents/Developer/Applications/Simulator (Watch).app" "/Applications/Simulator (Watch).app"
+else
+	echo "XCode Simulator application is missing"
+fi
 
 # Add a spacer to the left side of the Dock (where the applications are)
 #defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type="spacer-tile";}'
@@ -535,40 +539,6 @@ sudo mdutil -E / >/dev/null
 
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
-
-# Use a modified version of the Pro theme by default in Terminal.app
-osascript <<EOD
-tell application "Terminal"
-  local allOpenedWindows
-  local initialOpenedWindows
-  local windowID
-  set themeName to "One Dark"
-  (* Store the IDs of all the open terminal windows. *)
-  set initialOpenedWindows to id of every window
-  (* Open the custom theme so that it gets added to the list
-     of available terminal themes (note: this will open two
-     additional terminal windows). *)
-  do shell script "open '$HOME/.dotfiles/" & themeName & ".terminal'"
-  (* Wait a little bit to ensure that the custom theme is added. *)
-  delay 1
-  (* Set the custom theme as the default terminal theme. *)
-  set default settings to settings set themeName
-  (* Get the IDs of all the currently opened terminal windows. *)
-  set allOpenedWindows to id of every window
-  repeat with windowID in allOpenedWindows
-    (* Close the additional windows that were opened in order
-       to add the custom theme to the list of terminal themes. *)
-    if initialOpenedWindows does not contain windowID then
-      close (every window whose id is windowID)
-    (* Change the theme for the initial opened terminal windows
-       to remove the need to close them in order for the custom
-       theme to be applied. *)
-    else
-      set current settings of tabs of (every window whose id is windowID) to settings set themeName
-    end if
-  end repeat
-end tell
-EOD
 
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first

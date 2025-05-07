@@ -1,14 +1,14 @@
 #!/bin/bash
 set -e
 
-echo "Installing Node using ASDF"
-asdf nodejs update-nodebuild || echo "Failed to update node definitions"
-NODEJS_VERSION=$(asdf nodejs resolve 20 --latest-available)
-asdf install nodejs ${NODEJS_VERSION}
+echo "Installing Node using Mise"
+#asdf nodejs update-nodebuild || echo "Failed to update node definitions"
+#NODEJS_VERSION=$(mise nodejs resolve 24 --latest-available)
+#mise install nodejs ${NODEJS_VERSION}
 
 # asdf install node@20
-NODEJS_LTS_VERSION=$(asdf nodejs resolve lts --latest-available)
-asdf install nodejs ${NODEJS_LTS_VERSION}
+#NODEJS_LTS_VERSION=$(asdf nodejs resolve lts --latest-available)
+#asdf install nodejs ${NODEJS_LTS_VERSION}
 
 echo "Set the default diff utility for Git"
 git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"

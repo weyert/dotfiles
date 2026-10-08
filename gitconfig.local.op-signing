@@ -1,5 +1,5 @@
 [user]
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID3dbEVCqBzPGwz7v6vWfn4uM/of0Hpo8Ql9by+6q3nO
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPfyRZ5ZAU1kgS9BlCUXOHDZ4cr1MIPw6YqDJC3xYPpr
 [commit]
 	# Sign commits with SSH keys through 1Password.
 	gpgsign = true

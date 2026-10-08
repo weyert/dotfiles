@@ -117,4 +117,13 @@ fi
   builtin cd "$(< ~/.lastpwd)" 2>/dev/null
 [ -n "${TERMINALAPP}" ] && set_terminal_app_pwd
 
+# Enable the Mise integration depending on shell type
+if [ -n "${BASH_VERSION:-}" ]; then
+  eval "$(miss activate bash)"
+elif [ -n "${ZSH_VERSION:-}" ]; then
+  eval "$(miss activate zsh)"
+else
+  eval "$(miss activate sh)"
+fi
+
 SHPROFILE_LOADED=1

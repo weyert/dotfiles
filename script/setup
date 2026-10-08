@@ -60,9 +60,9 @@ if [[ -d "${HOME}/.bundle/cache" &&
 fi
 
 # Setup my home directory how I like it
-[[ -d ~/OSS ]] || mkdir -pv ~/OSS
-if ! [[ -d ~/OSS/dotfiles ]]; then
-  ln -vsf "${DOTFILESDIR}" ~/OSS/dotfiles
+[[ -d ~/Development/Projects/Opensource ]] || mkdir -pv ~/Development/Projects/Opensource
+if ! [[ -d ~/Development/Projects/Opensource/dotfiles ]]; then
+  ln -vsf "${DOTFILESDIR}" ~/Development/Projects/Opensource/dotfiles
 fi
 
 check_git_removal() {

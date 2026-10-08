@@ -1,14 +1,14 @@
 [user]
 	# Name used in commit messages.
-	name = Mike McQuaid
+	name = Weyert de Boer
 	# Email used in commit messages.
-	email = mike@mikemcquaid.com
+	email = weyert@gmail.com
 [include]
     # OS-specific (e.g. macOS) Git configuration
 	path = ~/.gitconfig.local
 [github]
 	# GitHub username for command-line tools.
-	user = MikeMcQuaid
+	user = weyert
 [color]
 	# Colour terminal command output when possible.
 	ui = auto
@@ -138,13 +138,13 @@
 	# Open a sandvault shell in the current repository or worktree.
 	sv = !sv shell "$(pwd)"
 
-	# Push the current branch upstream to MikeMcQuaid using the same
+	# Push the current branch upstream to weyert using the same
 	# branch name for the remote branch.
-	um = !(git remote -v | grep -q MikeMcQuaid || gh repo fork --remote --remote-name MikeMcQuaid) \
+	um = !(git remote -v | grep -q weyert || gh repo fork --remote --remote-name weyert) \
 	    && gh repo set-default $(git remote get-url origin) \
-	    && git push --set-upstream MikeMcQuaid $(git current-branch)
-	# Push the current branch to MikeMcQuaid and open a pull request.
-	umpr = !git um && gh pr create --web --head MikeMcQuaid:$(git current-branch)
+	    && git push --set-upstream weyert $(git current-branch)
+	# Push the current branch to weyert and open a pull request.
+	umpr = !git um && gh pr create --web --head weyert:$(git current-branch)
 
 	## Codebase Audit Commands
 	# Show the 20 most-changed files in the last year.
@@ -271,5 +271,5 @@
 	skippedCherryPicks = false
 [safe]
 	# It's expected that sandvault directories are owned by another user.
-	directory = /Users/Shared/sv-mike/repositories/*
-	directory = /Users/Shared/sv-mike/worktrees/*
+	directory = /Users/Shared/sv-weyert/repositories/*
+	directory = /Users/Shared/sv-weyert/worktrees/*

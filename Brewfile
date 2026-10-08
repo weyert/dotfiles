@@ -120,50 +120,63 @@ cask "claude-code@latest"
 cask "codex"
 # Voice and text chat software
 cask "discord"
-# Elgato FACECAM configuration tool
-cask "elgato-camera-hub"
-# Control your Elgato key lights
-cask "elgato-control-center"
 cask "font-sf-mono"
 cask "font-signika"
 cask "font-skranji"
+# Fonts
+cask "font-abel"
+cask "font-fjalla-one"
+cask "font-inter"
+cask "font-fira-code-nerd-font"
+cask "font-ibm-plex"
+cask "font-ibm-plex-mono"
+cask "font-blex-mono-nerd-font"
 # GIT client
 cask "fork"
-# GIF recording and sharing
-cask "gifox"
 # Homebrew's official GUI
 cask "homebrew-app"
-# Tool to prevent the system from going into sleep mode
-cask "keepingyouawake"
-# Trims video and audio files losslessly
-cask "losslesscut"
 # Multi-platform web browser
 cask "microsoft-edge"
-# App to write, plan, collaborate, and get organised
-cask "notion"
 # Audiobook manager for Audible users
 cask "openaudible"
-# Move and resize windows using keyboard shortcuts or snap areas
-cask "rectangle"
-# Instant messaging application focusing on security
-cask "signal"
-# Video game digital distribution service
-cask "steam"
-# Multiplayer code editor
-cask "zed"
+# Open-source code editor
+cask "visual-studio-code"
+cask "visual-studio-code-insiders"
 # Video communication and virtual meeting platform
 cask "zoom"
+# Affinity design tools
+cask "affinity"
+# Figma vector design tool
+cask "figma"
+# Safari technology preview
+cask "safari-technology-preview"
+# Microsoft Edge
+cask "microsoft-edge"
+# application switching
+cask "contexts"
+# Alfred alternative
+cask "raycast"
+# SetApp market place
+cask "setapp"
+# Development tools, environments, and tasks manager
+cask "mise"
+# AppStore
 mas "1Blocker", id: 1365531024
+mask "Wipr 2", id: 1662217862
+mask "Uplock", id: 6469049274
+mas "StopTheMadness", id: 1376402589
+mas "StopTheMadness", id: 1376402589
 mas "1Password for Safari", id: 1569813296
 mas "Consent-O-Matic", id: 1606897889
-mas "GarageBand", id: 682658836
 mas "Keynote", id: 361285480
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
+mas "Keynote", id: 409183694
 mas "Parachute", id: 6748614170
-mas "Pixelmator Pro", id: 1289583905
-mas "Reeder", id: 1529448980
 mas "Refined GitHub", id: 1519867270
 mas "Slack", id: 803453959
-mas "TouchDraw2", id: 1580322028
 mas "WhatsApp", id: 310633997
+mas "Xcode", id: 497799835
+mas "WireGuard", id: 1451685025
+mas "SponsorBlock for Safari", id: 1573461917
+mas "AmorphousDiskMark", :id 1168254295

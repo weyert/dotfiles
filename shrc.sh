@@ -351,8 +351,8 @@ else
 fi
 
 # Administrate worktree configuration.
-export ADMINISTRATE_SUBREPOS_DIR=/Users/Shared/sv-mike/repositories
-export ADMINISTRATE_WORKTREES_DIR=/Users/Shared/sv-mike/worktrees
+export ADMINISTRATE_SUBREPOS_DIR=/Users/Shared/sv-weyert/repositories
+export ADMINISTRATE_WORKTREES_DIR=/Users/Shared/sv-weyert/worktrees
 
 # Save directory changes
 cd() {
@@ -430,11 +430,11 @@ clearer() {
 # Transcribe files
 whisper_transcribe() {
   whisper-cli \
-    --model ~/OSS/mikemcquaid.com/tmp/models/ggml-large-v3-turbo.bin \
+    --model ~/Development/Projects/Personal/weyert.com/tmp/models/ggml-large-v3-turbo.bin \
     --language en "$@"
 }
 
 # New "Thought"
 new-thought() {
-  ~/OSS/mikemcquaid.com/bin/enrich-metadata new
+  ~/Development/Projects/Personal/weyert.com/bin/enrich-metadata new
 }

@@ -160,6 +160,8 @@ cask "raycast"
 cask "setapp"
 # Development tools, environments, and tasks manager
 cask "mise"
+# Warp terminal gui
+cask "warp"
 # AppStore
 mas "1Blocker", id: 1365531024
 mask "Wipr 2", id: 1662217862

@@ -54,10 +54,6 @@ brew "markdownlint-cli"
 brew "mas"
 # Remote terminal application
 brew "mosh"
-# Open source relational database management system
-brew "mysql@8.0", restart_service: :changed
-# HTTP(S) server and reverse proxy, and IMAP/POP3 proxy server
-brew "nginx"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node@24"
 # Framework for layout and rendering of i18n text
@@ -162,12 +158,20 @@ cask "setapp"
 cask "mise"
 # Warp terminal gui
 cask "warp"
+
+# Adobe clones
+cask "photocraft"
+# cask "vectorcraft"
+# cask "filmcraft"
+# cask "pdfcraft"
+# cask "effectcraft"
+# cask "designcraft"
+
 # AppStore
 mas "1Blocker", id: 1365531024
 mask "Wipr 2", id: 1662217862
 mask "Uplock", id: 6469049274
-mas "StopTheMadness", id: 1376402589
-mas "StopTheMadness", id: 1376402589
+mas "StopTheMadness Pro", id: 6471380298
 mas "1Password for Safari", id: 1569813296
 mas "Consent-O-Matic", id: 1606897889
 mas "Keynote", id: 361285480

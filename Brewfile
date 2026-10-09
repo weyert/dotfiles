@@ -1,5 +1,6 @@
 tap "homebrew/cask"
-tap "homebrew/core"
+tap "pardeyke/blackmagic"
+
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # Static analysis and lint tool, for (ba)sh scripts
@@ -104,6 +105,8 @@ brew "yt-dlp"
 brew "zizmor"
 # Fish-like fast/unobtrusive autosuggestions for zsh
 brew "zsh-autosuggestions"
+# Development tools, environments, and tasks manager
+brew "mise"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Application uninstaller
@@ -124,7 +127,7 @@ cask "font-abel"
 cask "font-fjalla-one"
 cask "font-inter"
 cask "font-fira-code-nerd-font"
-cask "font-ibm-plex"
+cask "font-ibm-plex-serif"
 cask "font-ibm-plex-mono"
 cask "font-blex-mono-nerd-font"
 # GIT client
@@ -137,7 +140,7 @@ cask "microsoft-edge"
 cask "openaudible"
 # Open-source code editor
 cask "visual-studio-code"
-cask "visual-studio-code-insiders"
+cask "visual-studio-code@insiders"
 # Video communication and virtual meeting platform
 cask "zoom"
 # Affinity design tools
@@ -154,8 +157,6 @@ cask "contexts"
 cask "raycast"
 # SetApp market place
 cask "setapp"
-# Development tools, environments, and tasks manager
-cask "mise"
 # Warp terminal gui
 cask "warp"
 
@@ -167,17 +168,25 @@ cask "photocraft"
 # cask "effectcraft"
 # cask "designcraft"
 
+cask "raycast"
+cask "transmission"
+
+#cask "davinci-resolve-studio"
+#cask "fusion"
+cask "davinci-resolve"
+cask "boltai"
+
 # AppStore
 mas "1Blocker", id: 1365531024
-mask "Wipr 2", id: 1662217862
-mask "Uplock", id: 6469049274
+mas "Wipr 2", id: 1662217862
+mas "Uplock", id: 6469049274
 mas "StopTheMadness Pro", id: 6471380298
 mas "1Password for Safari", id: 1569813296
 mas "Consent-O-Matic", id: 1606897889
 mas "Keynote", id: 361285480
 mas "Numbers", id: 361304891
 mas "Pages", id: 361309726
-mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "Parachute", id: 6748614170
 mas "Refined GitHub", id: 1519867270
 mas "Slack", id: 803453959
@@ -185,4 +194,4 @@ mas "WhatsApp", id: 310633997
 mas "Xcode", id: 497799835
 mas "WireGuard", id: 1451685025
 mas "SponsorBlock for Safari", id: 1573461917
-mas "AmorphousDiskMark", :id 1168254295
+mas "AmorphousDiskMark", id: 1168254295

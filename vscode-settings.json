@@ -69,7 +69,7 @@
     "git.fetchOnPull": true,
     "git.openDiffOnClick": false,
     "window.autoDetectColorScheme": true,
-    "workbench.preferredLightColorTheme": "MacOS Modern Light - Xcode Default",
+    "workbench.preferredLightColorTheme": "Dark Modern",
     "workbench.preferredDarkColorTheme": "MacOS Modern Dark - Xcode Default",
     "workbench.colorTheme": "MacOS Modern Light - Xcode Default",
     "workbench.productIconTheme": "macos-modern",

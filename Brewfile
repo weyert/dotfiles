@@ -1,4 +1,4 @@
-tap "homebrew/cask"
+#tap "homebrew/cask"
 tap "pardeyke/blackmagic"
 
 # Search tool like grep, but optimized for programmers
